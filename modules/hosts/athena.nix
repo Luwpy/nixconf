@@ -1,0 +1,279 @@
+{
+  inputs,
+  modulesPath,
+  config,
+  lib,
+  pkgs,
+  username,
+  ...
+}: {
+  imports = [
+    inputs.nixos-facter.nixosModules.facter
+    {config.facter.reportPath = ../../facter.athena.json;}
+
+    ../home
+    ../nixos/system.nix
+
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
+
+  # ==================== NETWORKING ====================
+  networking = {
+    hostName = "athena";
+    networkmanager.enable = true;
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [22];
+    };
+    
+    # Network optimizations for gaming/streaming
+    kernel.sysctl = {
+      "net.core.default_qdisc" = "fq";
+      "net.ipv4.tcp_congestion_control" = "bbr";
+      "net.core.netdev_max_backlog" = 5000;
+      "net.core.rmem_max" = 134217728;
+      "net.core.wmem_max" = 134217728;
+    };
+  };
+
+  # ==================== LOCALE & TIME ====================
+  time.timeZone = "America/Sao_Paulo";
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  # ==================== AMD BOOT OPTIMIZATIONS ====================
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+      timeout = 3; # Quick boot
+    };
+    
+    # Keep your zen kernel but add AMD optimizations
+    kernelPackages = pkgs.linuxPackages_zen;
+    
+    # AMD-specific kernel parameters
+    kernelParams = [
+      "amdgpu.dc=1"              # Display Core for modern features
+      "amdgpu.gpu_recovery=1"    # GPU recovery on crashes
+      "amd_pstate=active"        # Modern AMD P-State driver for Ryzen 5600
+    ];
+
+    # Essential kernel modules for your hardware
+    kernelModules = [
+      "amdgpu"                   # AMD GPU driver
+      "kvm-amd"                  # Virtualization support for Ryzen
+    ];
+
+    # Load AMD GPU drivers early in boot
+    initrd.kernelModules = [ "amdgpu" ];
+    
+    # Performance optimizations
+    kernel.sysctl = {
+      # Virtual memory optimizations for gaming/desktop
+      "vm.swappiness" = 10;              # Prefer RAM over swap
+      "vm.dirty_ratio" = 15;             # Dirty page cache ratio
+      "vm.dirty_background_ratio" = 5;   # Background dirty page ratio
+    };
+  };
+
+  # ==================== AMD HARDWARE CONFIGURATION ====================
+  hardware = {
+    # AMD CPU microcode updates for Ryzen 5600
+    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    
+    # Enhanced graphics configuration for RX 7600
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+      
+      # AMD-specific packages for RX 7600
+      extraPackages = with pkgs; [
+        amdvlk                   # AMD's official Vulkan driver
+        libva                    # Video Acceleration API
+        libva-utils              # VA-API utilities
+        rocm-opencl-icd          # OpenCL support for compute
+        rocm-opencl-runtime
+      ];
+      
+      # 32-bit support for games
+      extraPackages32 = with pkgs.pkgsi686Linux; [
+        amdvlk
+        libva
+      ];
+    };
+
+    # Firmware support
+    enableRedistributableFirmware = true;
+    
+    # Bluetooth configuration
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      settings = {
+        General = {
+          Enable = "Source,Sink,Media,Socket";
+          Experimental = true; # Better device support
+        };
+      };
+    };
+  };
+
+  # ==================== SERVICES ====================
+  services = {
+    openssh = {
+      enable = true;
+      settings = {
+        PasswordAuthentication = false;
+        PermitRootLogin = false;
+      };
+    };
+
+    # Enhanced PipeWire configuration
+    pipewire = {
+      enable = true;
+      audio.enable = true;        # Add this for proper audio
+      pulse.enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      jack.enable = true;         # Enable JACK for pro audio
+      wireplumber.enable = true;  # Modern session manager
+    };
+
+    printing.enable = true;
+    
+    # Additional services for your AMD setup
+    xserver = {
+      enable = true;
+      videoDrivers = [ "amdgpu" ]; # Explicit AMD driver
+    };
+    
+    # Hardware monitoring and management
+    smartd.enable = true;           # Monitor disk health
+    fwupd.enable = true;            # Firmware updates
+    blueman.enable = true;          # Bluetooth manager GUI
+    
+    # Power management optimized for Ryzen
+    power-profiles-daemon.enable = true;
+    auto-cpufreq.enable = true;     # Automatic CPU frequency scaling
+  };
+
+  # ==================== POWER MANAGEMENT ====================
+  powerManagement = {
+    enable = true;
+    cpuFreqGovernor = lib.mkDefault "schedutil"; # Best for Ryzen 5600
+  };
+
+  # ==================== PERFORMANCE & GAMING ====================
+  programs.gamemode.enable = true; # Automatic game optimizations
+
+  # Security optimizations for real-time applications
+  security = {
+    rtkit.enable = true;
+    pam.loginLimits = [
+      {
+        domain = "@users";
+        item = "rtprio";
+        type = "-";
+        value = "1";
+      }
+    ];
+  };
+
+  # ==================== USER CONFIGURATION ====================
+  users.users.${username} = {
+    hashedPassword = "$6$ca9LRYZYKAApodY6$wsLcJ1HRzXd4OQBvFYjFfIYRkQ8pGLs/LlUXvouOkLI.cGlnjJrnmdldUStfI9f9AowF1vW46JZU8IBM0qEmh0";
+
+    openssh.authorizedKeys.keys = [];
+
+    extraGroups = [
+      "audio"
+      "video"
+      "input"           # Input devices (keyboards, mice)
+      "render"          # GPU rendering access
+      "gamemode"        # GameMode optimizations
+      "podman"
+      "wheel"
+      "networkmanager"
+    ];
+  };
+
+  # ==================== HOME MANAGER ====================
+  modules.home = {
+    enable = true;
+    modules = [
+      # Add these as you create them:
+      # ../home/git.nix
+      # ../home/shell.nix
+    ];
+
+    packages = with pkgs; [
+      # Your current packages
+      zed-editor
+      discord
+      vesktop
+      spotify
+
+      ripgrep
+      fd
+      bat
+      eza
+      zoxide
+      
+      # Additional AMD/graphics tools
+      kitty              # GPU-accelerated terminal
+      firefox            # Web browser
+      vlc                # Media player
+      
+      # GPU monitoring and tools
+      radeontop          # AMD GPU monitoring
+      amdgpu_top         # Modern AMD GPU monitor
+      nvtop              # System GPU monitor (works with AMD)
+      btop               # System monitor
+    ];
+  };
+
+  # ==================== SYSTEM PACKAGES ====================
+  environment = {
+    # AMD-specific environment variables
+    variables = {
+      AMD_VULKAN_ICD = "RADV";      # Use Mesa RADV Vulkan driver
+      LIBVA_DRIVER_NAME = "radeonsi"; # Hardware video acceleration
+    };
+
+    systemPackages = with pkgs; [
+      # Your current packages
+      pciutils
+      usbutils
+      lshw
+
+      networkmanager
+      networkmanagerapplet
+
+      p7zip
+      unrar
+      
+      # AMD-specific tools
+      glxinfo            # OpenGL information
+      vulkan-tools       # Vulkan utilities (vulkaninfo, etc.)
+      mesa-demos         # OpenGL demos and tests
+      
+      # Audio tools
+      pavucontrol        # PulseAudio/PipeWire volume control
+      helvum             # PipeWire patchbay
+      pamixer            # CLI audio mixer
+      
+      # Hardware monitoring
+      lm_sensors         # Hardware sensors
+      inxi               # Detailed system information
+      neofetch           # System info display
+      
+      # Performance tools
+      htop
+      iotop              # I/O monitoring
+    ];
+  };
+
+  # ==================== NIXPKGS CONFIGURATION ====================
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.hostPlatform = "x86_64-linux";
+}
