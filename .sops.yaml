@@ -1,5 +1,5 @@
 keys:
-  - &athena age13qznsx5v0l5a3p36d9ezkwg0rhsrwrt7k9f8ltsle0mcsc6cjpmqy0wn2f
+  - &athena age1tmfenu0j7epykv2uuu8qugpy3fzpm7zvjgcwgc78z2ddjh74up5qthjwjc
 creation_rules:
   - path_regex: (hosts|modules|secrets)/([^/]*/)?[a-zA-Z0-9]+[a-zA-Z0-9._-]*[a-zA-Z0-9]+.(yaml|yml)$
     key_groups:

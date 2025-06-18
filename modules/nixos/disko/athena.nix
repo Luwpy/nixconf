@@ -64,7 +64,7 @@
                       ];
                     };
                     "/persist" = {
-                      mountpoint = "/persit";
+                      mountpoint = "/persist";
                       mountOptions = ["noatime" "compress=zstd"];
                     };
                   };
