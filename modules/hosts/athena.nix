@@ -146,7 +146,7 @@
     blueman.enable = true; # Bluetooth manager GUI
 
     # Power management optimized for Ryzen
-    power-profiles-daemon.enable = true;
+    # power-profiles-daemon.enable = true;
     auto-cpufreq.enable = true; # Automatic CPU frequency scaling
   };
 
