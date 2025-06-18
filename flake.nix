@@ -2,8 +2,8 @@
   description = "A very basic flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stabe.url = "github:nixos/nixpkgs/nixos-25.05";
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     home-manager = {
@@ -14,6 +14,9 @@
     nixos-facter.url = "github:numtide/nixos-facter-modules";
 
     devshell.url = "github:numtide/devshell";
+    disko.url = "github:nix-community/disko";
+
+    sops-nix.url = "github:Mic92/sops-nix";
   };
 
   outputs = {self, ...} @ inputs: let

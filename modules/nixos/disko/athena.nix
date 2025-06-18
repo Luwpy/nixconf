@@ -1,14 +1,14 @@
 {
   lib,
-  devices,
+  device ? "ata-S3SSDA480_S3+4802104290073",
   swapSizeInGb,
   ...
 }: {
-  disko.devices = {
+  devices = {
     disk = {
       main = {
         type = "disk";
-        devices = builtins.elemAt devices 0;
+        inherit device ;
         content = {
           type = "gpt";
           partitions = {
@@ -30,7 +30,7 @@
             luks = {
               size = "250G";
               content = {
-                types = "luks";
+                type = "luks";
                 name = "crypted";
 
                 settings = {
@@ -43,7 +43,7 @@
                   extraArgs = ["-f"];
                   subvolumes = {
                     "/root" = {
-                      mountpoint = ";";
+                      mountpoint = "/";
                       mountOptions = [
                         "noatime"
                         "compress=zstd"
@@ -69,26 +69,6 @@
                     };
                   };
                 };
-              };
-            };
-          };
-        };
-      };
-      subdisk = {
-        type = "disk";
-        devices = builtins.elemAt disks 1;
-        content = {
-          type = "gpt";
-          partitions = {
-            data = {
-              size = "100%";
-              content = {
-                type = "ntfs";
-                mountpoint = "/SSD";
-                mountOptions = [
-                  "noatime"
-                  "compress=zstd"
-                ];
               };
             };
           };

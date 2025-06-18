@@ -14,8 +14,19 @@
     ../home
     ../nixos/system.nix
 
+    ../nixos/disko
+    ../nixos/sops.nix
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
+
+  fileSystems = {
+    "/SSD" = {
+      device = "/dev/disk/by-id/wwn-0x5001b448c6b271d4";
+      fsType = "ntfs3";
+      options = [ "rw" "uid=1000"];
+    };
+  }
+  ;
 
   # ==================== NETWORKING ====================
   networking = {
@@ -84,14 +95,11 @@
         amdvlk # AMD's official Vulkan driver
         libva # Video Acceleration API
         libva-utils # VA-API utilities
-        rocm-opencl-icd # OpenCL support for compute
-        rocm-opencl-runtime
       ];
 
       # 32-bit support for games
       extraPackages32 = with pkgs.pkgsi686Linux; [
         amdvlk
-        libva
       ];
     };
 
@@ -174,7 +182,6 @@
 
   # ==================== USER CONFIGURATION ====================
   users.users.${username} = {
-    hashedPassword = "$6$ca9LRYZYKAApodY6$wsLcJ1HRzXd4OQBvFYjFfIYRkQ8pGLs/LlUXvouOkLI.cGlnjJrnmdldUStfI9f9AowF1vW46JZU8IBM0qEmh0";
 
     openssh.authorizedKeys.keys = [];
 
@@ -220,10 +227,18 @@
       # GPU monitoring and tools
       radeontop # AMD GPU monitoring
       amdgpu_top # Modern AMD GPU monitor
-      nvtop # System GPU monitor (works with AMD)
+      # nvtop # System GPU monitor (works with AMD)
       btop # System monitor
     ];
   };
+
+  modules.disko = {
+    enable = true;
+    device = "ata-S3SSDA480_S3+4802104290073";
+    fileSystem = "athena";
+  };
+
+  modules.sops.enable = true;
 
   # ==================== SYSTEM PACKAGES ====================
   environment = {

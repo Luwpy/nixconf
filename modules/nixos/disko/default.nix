@@ -12,8 +12,8 @@ in {
   imports = [inputs.disko.nixosModules.disko];
   options.modules.disko = {
     enable = lib.mkEnableOption "disko module";
-    devices = lib.mkOption {
-      type = [lib.types.str];
+    device = lib.mkOption {
+      type = lib.types.str;
       default = null;
     };
     swapSizeInGb = lib.mkOption {
