@@ -75,7 +75,7 @@
     users.${username} = {
       isNormalUser = true;
       extraGroups = ["wheel" "networkmanager"];
-      shell = pkgs.fish;
+      shell = lib.mkDefault pkgs.fish;
       hashedPasswordFile = config.sops.secrets.user_password.path;
       # Note: Set hashedPassword in your host config or use SOPS
     };
