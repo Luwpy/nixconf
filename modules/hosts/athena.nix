@@ -16,6 +16,7 @@
 
     ../nixos/disko
     ../nixos/sops.nix
+    ../nixos/hyprland.nix
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
@@ -23,10 +24,9 @@
     "/SSD" = {
       device = "/dev/disk/by-id/wwn-0x5001b448c6b271d4";
       fsType = "ntfs3";
-      options = [ "rw" "uid=1000"];
+      options = ["rw" "uid=1000"];
     };
-  }
-  ;
+  };
 
   # ==================== NETWORKING ====================
   networking = {
@@ -182,7 +182,6 @@
 
   # ==================== USER CONFIGURATION ====================
   users.users.${username} = {
-
     openssh.authorizedKeys.keys = [];
 
     extraGroups = [
@@ -197,7 +196,7 @@
     ];
   };
 
-  # ==================== HOME MANAGER ====================
+  # ==================== MODULES ====================
   modules.home = {
     enable = true;
     modules = [
@@ -239,6 +238,11 @@
   };
 
   modules.sops.enable = true;
+
+  modules.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
 
   # ==================== SYSTEM PACKAGES ====================
   environment = {

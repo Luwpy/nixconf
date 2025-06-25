@@ -8,7 +8,7 @@
     disk = {
       main = {
         type = "disk";
-        inherit device ;
+        inherit device;
         content = {
           type = "gpt";
           partitions = {
