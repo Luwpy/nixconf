@@ -1,38 +1,41 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  # Remove the conditional - let this be enabled by the system module
+  wayland.windowManager.hyprland = {
+    enable = true;
+    settings = {
+      monitor = [
+        "DP-1,1920x1080@144,0x0,1"
+        ",preferred,auto,auto"
+      ];
 
-	config = lib.mkIf config.modules.hyprland {
-		wayland.windowManager.hyprland = {
-			enable = true;
-			settings = {
-			monitor = [
-				"DP-1,1920x1080@144,0x0,1"
-				",preferred,auto,auto"
-				];
+      input = {
+        kb_layout = "br";
+        follow_mouse = 1;
+        sensitivity = 0;
+        force_no_accel = 1;
+      };
 
-				input = {
-					kb_layout = "br";
-					follow_mouse = 1;
-					sensitivity = 0;
-					force_no_accel = 1;
-				};
+      general = {
+        gaps_in = 5;
+        gaps_out = 10;
+        border_size = 2;
+        layout = "dwindle";
+      };
 
-				general = {
-					gaps_in = 5;
-					gaps_out = 10;
-					border_size = 2;
+      decoration = {
+        rounding = 5;
+        blur = {
+          enabled = true;
+        };
+        drop_shadow = false;
+      };
 
-					layout = "dwindle";
-				};
-
-				decoration = {
-					rounding = 5;
-					blur = {
-						enabled = true;
-					};
-					drop_shadow = false;
-				};
-
-				animations = {
+      animations = {
         enabled = true;
         bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
         animation = [
@@ -44,27 +47,27 @@
         ];
       };
 
-			dwindle = {
-				pseudotile = true;
-				preserve_split = true;
-			};
-			windowrule = [
-				"float, ^(pavucontrol)$"
-				
-			];
+      dwindle = {
+        pseudotile = true;
+        preserve_split = true;
+      };
 
-			"$mod" = "SUPER";
+      windowrule = [
+        "float, ^(pavucontrol)$"
+      ];
 
-			bind = [
-				"$mod, Return, exec, kitty"
-				"$mod, E, exec, nautilus"
+      "$mod" = "SUPER";
 
-				"$mod, Q, killactive"
-				"$mod SHIFT, E, exit"
-				"$mod, F, fullscreen"
-				"$mod, P, pseudo"
+      bind = [
+        "$mod, Return, exec, kitty"
+        "$mod, E, exec, nautilus"
 
-				"$mod, left, movefocus, l"
+        "$mod, Q, killactive"
+        "$mod SHIFT, E, exit"
+        "$mod, F, fullscreen"
+        "$mod, P, pseudo"
+
+        "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"
         "$mod, up, movefocus, u"
         "$mod, down, movefocus, d"
@@ -100,47 +103,41 @@
         "$mod SHIFT, 0, movetoworkspace, 10"
 
         # Screenshot bindings
-        ", Print, exec, grim ~/Pictures/screenshot-$(date +'%Y-%m-%d-%H%M%S').png"  # Full screen
-        "$mod, Print, exec, grim -g \"$(slurp)\" ~/Pictures/screenshot-$(date +'%Y-%m-%d-%H%M%S').png"  # Area selection
-        
-        # Audio controls (if you have media keys)
+        ", Print, exec, grim ~/Pictures/screenshot-$(date +'%Y-%m-%d-%H%M%S').png"
+        "$mod, Print, exec, grim -g \"$(slurp)\" ~/Pictures/screenshot-$(date +'%Y-%m-%d-%H%M%S').png"
+
+        # Audio controls
         ", XF86AudioRaiseVolume, exec, pamixer -i 5"
         ", XF86AudioLowerVolume, exec, pamixer -d 5"
         ", XF86AudioMute, exec, pamixer -t"
-        
+
         # Manual audio controls (Alt + F keys as backup)
         "ALT, F12, exec, pamixer -i 5"
         "ALT, F11, exec, pamixer -d 5"
         "ALT, F10, exec, pamixer -t"
-			];
+      ];
 
-			bindm = [
-				"$mod, mouse:272, movewindow"
-				"$mod, mouse:273, resizewindow"
-			];
+      bindm = [
+        "$mod, mouse:272, movewindow"
+        "$mod, mouse:273, resizewindow"
+      ];
 
-			exec-once = [
-				"dunst"
-				"discord"
-				"vesktop"
-			];
-			};
-		};
+      exec-once = [
+        "dunst"
+        "discord"
+        "vesktop"
+      ];
+    };
+  };
 
-	home.file."Pictures/.keep".text = "";
+  home.file."Pictures/.keep".text = "";
 
-	home.packages = with pkgs; [
-		grim
-		slurp
-
-		wl-clipboard
-		
-
-		dunst
-		libnotify
-
-		pamixer
-	];
-	};
-	
+  home.packages = with pkgs; [
+    grim
+    slurp
+    wl-clipboard
+    dunst
+    libnotify
+    pamixer
+  ];
 }

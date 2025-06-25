@@ -1,4 +1,13 @@
-{ config, pkgs, inputs, lib, username, ... }: let cfg = config.modules.hyprland; in {
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  username,
+  ...
+}: let
+  cfg = config.modules.hyprland;
+in {
   options.modules.hyprland = {
     enable = lib.mkEnableOption "hyprland";
 
@@ -21,7 +30,7 @@
     xdg.portal = {
       enable = true;
       extraPortals = with pkgs; [
-        xdg-xdg-desktop-portal-hyprland
+        xdg-desktop-portal-hyprland
         xdg-desktop-portal-gtk
       ];
       config.commom.default = "*";
@@ -29,7 +38,18 @@
 
     security = {
       polkit.enable = true;
-      rkit.enable = true;
+    };
+
+    services = {
+      greetd = {
+        enable = true;
+        settings = {
+          default_session = {
+            command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+            user = "greeter";
+          };
+        };
+      };
     };
 
     environment.sessionVariables = {
@@ -46,8 +66,10 @@
     };
 
     users.users.${username}.extraGroups = [
-      "audio" "video" "input" "render"
-    ]
+      "audio"
+      "video"
+      "input"
+      "render"
+    ];
   };
-  
 }

@@ -183,6 +183,7 @@
   # ==================== USER CONFIGURATION ====================
   users.users.${username} = {
     openssh.authorizedKeys.keys = [];
+    shell = pkgs.zsh;
 
     extraGroups = [
       "audio"
@@ -196,6 +197,8 @@
     ];
   };
 
+  programs.zsh.enable = true;
+
   # ==================== MODULES ====================
   modules.home = {
     enable = true;
@@ -203,6 +206,7 @@
       # Add these as you create them:
       # ../home/git.nix
       # ../home/shell.nix
+      ../home/hyprland.nix
     ];
 
     packages = with pkgs; [
