@@ -1,6 +1,6 @@
 {
   lib,
-  device ? "ata-S3SSDA480_S3+4802104290073",
+  device ? "/dev/disk/by-id/ata-S3SSDA480_S3+4802104290073",
   swapSizeInGb,
   ...
 }: {
@@ -28,7 +28,8 @@
               };
             };
             luks = {
-              size = "250G";
+              size = "100%";
+              start = "250G";
               content = {
                 type = "luks";
                 name = "crypted";
