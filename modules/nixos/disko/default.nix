@@ -18,7 +18,7 @@ in {
     };
     swapSizeInGb = lib.mkOption {
       type = with lib; types.nullOr types.str;
-      default = null;
+      default = "4G";
     };
     fileSystem = lib.mkOption {
       type = lib.types.enum (lib.attrNames fileSystems);
