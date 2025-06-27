@@ -237,7 +237,7 @@
 
   modules.disko = {
     enable = true;
-    device = "ata-S3SSDA480_S3+4802104290073";
+    device = "/dev/disk/by-id/ata-S3SSDA480_S3+4802104290073";
     fileSystem = "athena";
   };
 
