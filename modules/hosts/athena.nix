@@ -50,6 +50,8 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
       timeout = 3; # Quick boot
+
+      
     };
 
     # Keep your zen kernel but add AMD optimizations
@@ -78,6 +80,8 @@
       "vm.dirty_ratio" = 15; # Dirty page cache ratio
       "vm.dirty_background_ratio" = 5; # Background dirty page ratio
     };
+
+    supportedFileSystems = ["ntfs"];
   };
 
   # ==================== AMD HARDWARE CONFIGURATION ====================

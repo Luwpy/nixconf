@@ -6,6 +6,8 @@
       # Development packages available in the shell
       packages = with pkgs; [
         # Nix tools
+        helix # Terminal editor
+        
         nil # Nix language server
         alejandra # Nix formatter
         deadnix # Find dead Nix code
