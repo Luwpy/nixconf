@@ -7,7 +7,10 @@
 }: let
   cfg = config.modules.home;
 in {
-  imports = [inputs.home-manager.nixosModules.default];
+  imports = [
+    inputs.home-manager.nixosModules.default
+    
+    ];
 
   options.modules.home = {
     enable = lib.mkEnableOption "home-manager module";

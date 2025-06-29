@@ -253,6 +253,30 @@
     xwayland.enable = true;
   };
 
+  modules.virtualisation = {
+    enable = true;
+
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      dockerSocket = true;
+      extraPackages = with pkgs; [
+        podman-compose
+        podman-tui
+      ];
+    };
+
+    libvirt = {
+      enable = true;
+      qemu = true;
+    };
+
+    networking = {
+      enable = true;
+      slirp4netns = true;
+    };
+  };
+
   # ==================== SYSTEM PACKAGES ====================
   environment = {
     # AMD-specific environment variables

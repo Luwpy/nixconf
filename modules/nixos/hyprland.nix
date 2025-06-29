@@ -33,7 +33,7 @@ in {
         xdg-desktop-portal-hyprland
         xdg-desktop-portal-gtk
       ];
-      config.commom.default = "*";
+      config.common.default = "*";
     };
 
     security = {
