@@ -17,6 +17,8 @@
     disko.url = "github:nix-community/disko";
 
     sops-nix.url = "github:Mic92/sops-nix";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL";
+    
   };
 
   outputs = {self, ...} @ inputs: let
