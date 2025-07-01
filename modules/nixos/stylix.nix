@@ -35,7 +35,7 @@
 
     fonts = {
       monospace = {
-        package = pkgs.nerdfonts.fira-code;
+        package = pkgs.nerd-fonts.fira-code;
         name = "FireCode Nerd Font Mono";
       };
       sansSerif = {
