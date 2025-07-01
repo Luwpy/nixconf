@@ -6,7 +6,6 @@
         cat = "bat -p";
         find = "fd";
         gc = "nix store gc";
-
       };
     };
     starship = {
@@ -31,7 +30,7 @@
     };
     fzf = {
       enable = true;
-      fileWidgetOption = ["--preview 'bat --color=always {}'"];
+      #      fileWidgetOption = ["--preview 'bat --color=always {}'"];
     };
   };
 }

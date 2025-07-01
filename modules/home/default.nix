@@ -9,8 +9,7 @@
 in {
   imports = [
     inputs.home-manager.nixosModules.default
-    
-    ];
+  ];
 
   options.modules.home = {
     enable = lib.mkEnableOption "home-manager module";

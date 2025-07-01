@@ -18,7 +18,8 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
-    
+
+    stylix.url = "github:danth/stylix";
   };
 
   outputs = {self, ...} @ inputs: let

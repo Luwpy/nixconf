@@ -1,5 +1,11 @@
-{ inputs, lib, pkgs, username, ...}:{
-  _modules.args.username = "luwpy";
+{
+  inputs,
+  lib,
+  pkgs,
+  username,
+  ...
+}: {
+  #  _modules.args.username = "luwpy";
 
   imports = [
     inputs.nixos-wsl.nixosModules.wsl
@@ -49,7 +55,6 @@
       enable = true;
       clean.enable = true;
       clean.extraArgs = "--keep-since 7d";
-
     };
   };
 

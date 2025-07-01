@@ -60,27 +60,21 @@
               subvolumes = {
                 "/root" = {
                   mountpoint = "/";
-                  
                 };
                 "/home" = {
                   mountpoint = "/home";
-                  
                 };
                 "/nix" = {
                   mountpoint = "/nix";
-                  
                 };
                 "/persist" = {
                   mountpoint = "/persist";
-                  
                 };
                 "/var/log" = {
                   mountpoint = "/var/log";
-                  
                 };
                 "/.snapshots" = {
                   mountpoint = "/.snapshots";
-                  
                 };
               };
             };

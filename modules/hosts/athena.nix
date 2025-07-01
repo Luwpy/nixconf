@@ -17,6 +17,8 @@
     ../nixos/disko
     ../nixos/sops.nix
     ../nixos/hyprland.nix
+    ../nixos/stylix.nix
+    ../nixos/virtualisation.nix
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
@@ -50,8 +52,6 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
       timeout = 3; # Quick boot
-
-      
     };
 
     # Keep your zen kernel but add AMD optimizations
@@ -81,7 +81,7 @@
       "vm.dirty_background_ratio" = 5; # Background dirty page ratio
     };
 
-    supportedFileSystems = ["ntfs"];
+    supportedFilesystems = ["ntfs"];
   };
 
   # ==================== AMD HARDWARE CONFIGURATION ====================

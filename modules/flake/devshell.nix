@@ -7,7 +7,7 @@
       packages = with pkgs; [
         # Nix tools
         helix # Terminal editor
-        
+
         nil # Nix language server
         alejandra # Nix formatter
         deadnix # Find dead Nix code
@@ -36,7 +36,7 @@
         {
           name = "fmt";
           help = "Format all Nix files";
-          command = "nix fmt";
+          command = "alejandra .";
           category = "formatters";
         }
         {

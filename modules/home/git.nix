@@ -1,9 +1,16 @@
-{ pkgs, lib, username, ... }: {
-  home.packages = with pkgs; [lazygit];
+{
+  pkgs,
+  lib,
+  username,
+  ...
+}: {
+  # home.packages = with pkgs; [lazygit];
 
   programs.git = {
     enable = true;
     userName = "luwpy";
-    userEmail = "jpcastro.sp@gmail.com"
+    userEmail = "jpcastro.sp@gmail.com";
   };
+
+  programs.lazygit.enable = true;
 }
