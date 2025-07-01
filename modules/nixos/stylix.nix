@@ -34,10 +34,10 @@
     };
 
     fonts = {
-      #monospace = {
-      #  package = pkgs.nerdfonts.fira-code;
-      #  name = "FireCode Nerd Font Mono";
-      #};
+      monospace = {
+        package = pkgs.nerdfonts.fira-code;
+        name = "FireCode Nerd Font Mono";
+      };
       sansSerif = {
         package = pkgs.dejavu_fonts;
         name = "DejaVu Sans";
