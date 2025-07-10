@@ -33,7 +33,7 @@
               size = "100%";
               content = {
                 type = "lvm_pv";
-                vg = "root_vg";
+                vg = "root_vg";  
               };
             };
           };
@@ -41,8 +41,8 @@
       };
     };
 
-    lvm_vg = {
-      pool = {
+    lvm_vg = {  
+      root_vg = {  
         type = "lvm_vg";
         lvs = {
           swap = {
