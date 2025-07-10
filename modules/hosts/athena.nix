@@ -208,9 +208,11 @@
     enable = true;
     modules = [
       # Add these as you create them:
-      # ../home/git.nix
-      # ../home/shell.nix
+      ../home/git.nix
+      ../home/fish.nix
+      ../home/eza.nix
       ../home/hyprland.nix
+      
     ];
 
     packages = with pkgs; [
@@ -236,6 +238,8 @@
       amdgpu_top # Modern AMD GPU monitor
       # nvtop # System GPU monitor (works with AMD)
       btop # System monitor
+
+      inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };
 

@@ -63,6 +63,7 @@
         "$mod, E, exec, nautilus"
 
         "$mod, Q, killactive"
+        # "$mod, R, rofi"
         "$mod SHIFT, E, exit"
         "$mod, F, fullscreen"
         "$mod, P, pseudo"

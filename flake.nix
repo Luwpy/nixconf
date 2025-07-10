@@ -20,6 +20,9 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
 
     stylix.url = "github:danth/stylix";
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+    };
   };
 
   outputs = {self, ...} @ inputs: let
