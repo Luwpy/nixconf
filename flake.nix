@@ -23,6 +23,10 @@
     ghostty = {
       url = "github:ghostty-org/ghostty";
     };
+    niri-flake = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {self, ...} @ inputs: let

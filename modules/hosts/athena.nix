@@ -212,7 +212,6 @@
       ../home/fish.nix
       ../home/eza.nix
       ../home/hyprland.nix
-      
     ];
 
     packages = with pkgs; [
