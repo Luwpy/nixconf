@@ -12,7 +12,7 @@
 
     polarity = "dark";
 
-    image = ../../wallpaper/wallpaper.gif;
+    image = ../../wallpaper/wallpaper.png;
 
     base16Scheme = {
       base00 = "#0a0a0f"; # Default Background - Preto espacial profundo

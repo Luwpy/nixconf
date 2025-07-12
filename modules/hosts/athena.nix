@@ -16,6 +16,7 @@
 
     ../nixos/disko
     ../nixos/sops.nix
+    ../nixos/niri.nix
     ../nixos/hyprland.nix
     ../nixos/stylix.nix
     ../nixos/virtualisation.nix
@@ -212,7 +213,6 @@
       ../home/fish.nix
       ../home/eza.nix
       ../home/hyprland.nix
-      
     ];
 
     packages = with pkgs; [
