@@ -7,6 +7,9 @@
         find = "fd";
         gc = "nix store gc";
       };
+      shellInit = ''
+        zoxide init fish --cmd cd | source
+      '';
     };
     starship = {
       enable = true;
@@ -19,6 +22,12 @@
         hostname.format = "$hostname:";
         username.format = "$user@";
       };
+    };
+
+    zoxide = {
+      enable = true;
+      enableFishIntegration = true;
+      # flags = [ "--cmd cd"];
     };
 
     bat.enable = true;

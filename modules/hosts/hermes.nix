@@ -5,11 +5,11 @@
   username,
   ...
 }: {
-  #  _modules.args.username = "luwpy";
+  # _modules.args.username = "luwpy";
 
   imports = [
     inputs.nixos-wsl.nixosModules.wsl
-
+    inputs.vscode-server.nixosModules.default
     ../home
     ../nixos/sops.nix
     ../nixos/system.nix
@@ -29,13 +29,14 @@
     };
   };
 
-  modules.sops.enable = true;
+  modules.sops.enable = false;
 
   modules.home = {
     enable = true;
     modules = [
       ../home/git.nix
-      ../home/fish.nix
+      ../home/zsh.nix
+      ../home/eza.nix
     ];
     packages = with pkgs; [obsidian];
   };
@@ -46,6 +47,16 @@
       enable = true;
       allowedTCPPorts = [22];
       trustedInterfaces = ["cni0" "eth0"];
+    };
+  };
+
+  services = {
+    vscode-server.enable = true;
+    vscode-server.nodejsPackage = pkgs.nodejs;
+    tailscale.enable = true;
+    locate.enable = true;
+    ollama = {
+      enable = false;
     };
   };
 
@@ -74,4 +85,11 @@
     man.enable = true;
     dev.enable = true;
   };
+
+  users.users.${username} = {
+    shell = lib.mkForce pkgs.zsh;
+  };
+
+  programs.zsh.enable = true;
+  programs.fish.enable = false;
 }

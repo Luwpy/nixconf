@@ -33,7 +33,7 @@
               size = "100%";
               content = {
                 type = "lvm_pv";
-                vg = "root_vg";  # This references the VG name
+                vg = "root_vg"; # This references the VG name
               };
             };
           };
@@ -41,8 +41,10 @@
       };
     };
 
-    lvm_vg = {  # ← This should be "lvm_vg", not "root_vg"
-      root_vg = {  # ← This is the actual volume group name
+    lvm_vg = {
+      # ← This should be "lvm_vg", not "root_vg"
+      root_vg = {
+        # ← This is the actual volume group name
         type = "lvm_vg";
         lvs = {
           swap = {
