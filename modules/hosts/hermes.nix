@@ -14,10 +14,16 @@
     ../nixos/sops.nix
     ../nixos/system.nix
     ../nixos/wsl.nix
+    ../nixos/virtualisation.nix
   ];
 
   environment = {
-    systemPackages = with pkgs; [usbutils coreutils];
+    systemPackages = with pkgs; [
+      usbutils
+      coreutils
+      nixd
+      alejandra
+    ];
     variables = {
       NIX_LD_LIBRARY_PATH = lib.mkForce (lib.makeLibraryPath [
         "/run/current-system/sw/share/nix-ld"
@@ -29,8 +35,12 @@
     };
   };
 
-  modules.sops.enable = false;
-
+  modules.sops = {
+    enable = true;
+    secrets = {
+      hermes_password.neededForUsers = true;
+    };
+  };
   modules.home = {
     enable = true;
     modules = [
@@ -39,6 +49,12 @@
       ../home/eza.nix
     ];
     packages = with pkgs; [obsidian];
+  };
+
+  modules.virtualisation = {
+    enable = true;
+
+    libvirt.enable = true;
   };
 
   networking = {

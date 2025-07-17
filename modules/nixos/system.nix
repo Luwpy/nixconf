@@ -45,7 +45,7 @@
   };
 
   # Enable fish shell system-wide
-  programs.fish = {
+  programs.fish = lib.mkDefault {
     enable = true;
     interactiveShellInit = ''
       set fish_greeting

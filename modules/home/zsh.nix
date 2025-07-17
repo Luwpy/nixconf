@@ -3,17 +3,30 @@
     zsh = {
       enable = true;
 
-
-    programs.zsh.initExtra = ''
-      eval "$(${cfg.package}/bin/zoxide init zsh ${cfgOptions})"
-    '';
-
+      initContent = ''
+        eval "$(${pkgs.zoxide}/bin/zoxide init zsh --cmd cd)"
+      '';
     };
 
     zoxide = {
       enable = true;
       enableZshIntegration = true;
-      options = [ "--cmd cd"];
+      # options = [ "--cmd cd"];
+    };
+
+    helix = {
+      enable = true;
+      settings = {
+        theme = "tokyonight";
+      };
+
+      languages.language = [
+        {
+          name = "nix";
+          auto-format = true;
+          formatter.command = "pkgs.alejandra/bin/alejandra";
+        }
+      ];
     };
   };
 }

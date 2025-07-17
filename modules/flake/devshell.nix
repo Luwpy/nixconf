@@ -8,7 +8,7 @@
         # Nix tools
         helix # Terminal editor
 
-        nil # Nix language server
+        nixd # Nix language server
         alejandra # Nix formatter
         deadnix # Find dead Nix code
 
