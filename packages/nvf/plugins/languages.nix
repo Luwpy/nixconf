@@ -7,7 +7,7 @@
 
       bash = {
         enable = true;
-        format = true;
+        format.enable = true;
         lsp.enable = true;
       };
 
@@ -38,6 +38,8 @@
           ];
         };
       };
+
+      
 
       rust = {
         enable = true;
