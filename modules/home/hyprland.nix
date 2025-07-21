@@ -1,10 +1,13 @@
 {
+  inputs,
   config,
   lib,
   pkgs,
   ...
-}: {
-  # Remove the conditional - let this be enabled by the system module
+}:
+{
+  imports = [ inputs.anyrun.homeManagerModules.anyrun ];
+
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
@@ -52,31 +55,49 @@
       };
 
       windowrule = [
-        "float, ^(pavucontrol)$"
+        # "float, ^(pavucontrol)$"
       ];
 
       "$mod" = "SUPER";
 
       bind = [
+        # Application bindings
         "$mod, Return, exec, kitty"
         "$mod, E, exec, nautilus"
 
+        # Window management
         "$mod, Q, killactive"
-        # "$mod, R, rofi"
-        "$mod SHIFT, E, exit"
         "$mod, F, fullscreen"
         "$mod, P, pseudo"
 
+        # Hyprland control - QUIT BINDINGS
+        "$mod SHIFT, E, exit"
+        "$mod SHIFT CTRL, Q, exec, hyprctl dispatch exit"
+        "$mod SHIFT, Q, exec, pkill Hyprland"
+
+        # Focus movement
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"
         "$mod, up, movefocus, u"
         "$mod, down, movefocus, d"
 
-        # Move focus with vim keys
+        # Focus movement with vim keys
         "$mod, h, movefocus, l"
         "$mod, l, movefocus, r"
         "$mod, k, movefocus, u"
         "$mod, j, movefocus, d"
+
+        # Move windows
+        "$mod SHIFT, left, movewindow, l"
+        "$mod SHIFT, right, movewindow, r"
+        "$mod SHIFT, up, movewindow, u"
+        "$mod SHIFT, down, movewindow, d"
+
+        # Move windows with vim keys
+        "$mod SHIFT, h, movewindow, l"
+        "$mod SHIFT, l, movewindow, r"
+        "$mod SHIFT, k, movewindow, u"
+        "$mod SHIFT, j, movewindow, d"
 
         # Switch workspaces
         "$mod, 1, workspace, 1"
@@ -102,9 +123,16 @@
         "$mod SHIFT, 9, movetoworkspace, 9"
         "$mod SHIFT, 0, movetoworkspace, 10"
 
-        # Screenshot bindings
-        ", Print, exec, grim ~/Pictures/screenshot-$(date +'%Y-%m-%d-%H%M%S').png"
-        "$mod, Print, exec, grim -g \"$(slurp)\" ~/Pictures/screenshot-$(date +'%Y-%m-%d-%H%M%S').png"
+        # Screenshot bindings - to clipboard
+        ", Print, exec, grim - | wl-copy"
+        "$mod, Print, exec, grim -g \"$(slurp)\" - | wl-copy"
+
+        # Screenshot bindings - save to file (if you still want this option)
+        "$mod SHIFT, Print, exec, grim ~/Pictures/screenshot-$(date +'%Y-%m-%d-%H%M%S').png"
+        "$mod CTRL, Print, exec, grim -g \"$(slurp)\" ~/Pictures/screenshot-$(date +'%Y-%m-%d-%H%M%S').png"
+
+        # Anyrun launcher
+        "$mod, R, exec, anyrun"
 
         # Audio controls
         ", XF86AudioRaiseVolume, exec, pamixer -i 5"
@@ -115,6 +143,9 @@
         "ALT, F12, exec, pamixer -i 5"
         "ALT, F11, exec, pamixer -d 5"
         "ALT, F10, exec, pamixer -t"
+
+        # Lock screen
+        "$mod CTRL, L, exec, swaylock"
       ];
 
       bindm = [
@@ -123,21 +154,70 @@
       ];
 
       exec-once = [
+        # Initialize swww daemon and set wallpaper
+        "swww-daemon && sleep 2 && swww img /persist/nixconf/wallpaper/wallpaper.gif --transition-type fade --transition-duration 2"
+
+        # Other startup apps
         "dunst"
-        "discord"
-        "vesktop"
       ];
     };
   };
 
-  home.file."Pictures/.keep".text = "";
-
+  # Simple package list with swww
   home.packages = with pkgs; [
+    # Wallpaper daemon
+    swww
+
+    # Screenshot tools
     grim
     slurp
     wl-clipboard
+
+    # Notifications
     dunst
     libnotify
+
+    # Audio
     pamixer
+
+    # Lock screen
+    swaylock
+
+    # File manager
+    nautilus
   ];
+
+  programs.anyrun = {
+    enable = lib.mkForce true;
+    config = {
+      x = {
+        fraction = 0.5;
+      };
+      y = {
+        fraction = 0.3;
+      };
+      width = {
+        fraction = 0.3;
+      };
+      hideIcons = false;
+      ignoreExclusiveZones = false;
+      layer = "overlay";
+      hidePluginInfo = false;
+      closeOnClick = false;
+      showResultsImmediately = false;
+      maxEntries = null;
+
+      plugins = [
+        # An array of all the plugins you want, which either can be paths to the .so files, or their packages
+        "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/kidex"
+      ];
+    };
+
+    # Inline comments are supported for language injection into
+    # multi-line strings with Treesitter! (Depends on your editor)
+
+  };
+
+  # Create Pictures directory
+  home.file."Pictures/.keep".text = "";
 }

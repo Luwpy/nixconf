@@ -23,14 +23,6 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  fileSystems = {
-    "/SSD" = {
-      device = "/dev/disk/by-id/wwn-0x5001b448c6b271d4";
-      fsType = "ntfs3";
-      options = ["rw" "uid=1000"];
-    };
-  };
-
   # ==================== NETWORKING ====================
   networking = {
     hostName = "athena";
@@ -210,9 +202,11 @@
     modules = [
       # Add these as you create them:
       ../home/git.nix
-      ../home/fish.nix
+      ../home/zsh.nix
       ../home/eza.nix
       ../home/hyprland.nix
+      ../home/zed.nix
+      ../home/zen-browser.nix
     ];
 
     packages = with pkgs; [

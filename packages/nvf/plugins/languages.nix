@@ -39,8 +39,6 @@
         };
       };
 
-      
-
       rust = {
         enable = true;
         crates = {

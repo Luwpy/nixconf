@@ -29,14 +29,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nvf.url = "github:notashelf/nvf";
+    anyrun = {
+      url = "github:anyrun-org/anyrun";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs = {self, ...} @ inputs: let
     importFlakeParts =
-      (import ./modules/flake/lib {inherit self inputs;})
-      .flake
-      .lib
-      .importModulesRecursive;
+      (import ./modules/flake/lib {inherit self inputs;}).flake.lib.importModulesRecursive;
   in
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       imports = importFlakeParts ./modules/flake;

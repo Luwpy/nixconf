@@ -41,7 +41,7 @@ in {
     secrets = lib.mkOption {
       type = lib.types.attrs;
       default = {
-        user_password.neededForUsers = true;
+        # user_password.neededForUsers = true;
         # k3s_token = {};
       };
       description = "An attribute set mapping secret names to their configuration.";

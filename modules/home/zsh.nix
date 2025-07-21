@@ -16,9 +16,9 @@
 
     helix = {
       enable = true;
-      settings = {
-        theme = "tokyonight";
-      };
+      # settings = {
+      #   theme = "tokyonight";
+      # };
 
       languages.language = [
         {
