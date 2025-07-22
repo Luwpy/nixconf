@@ -6,7 +6,7 @@
   ...
 }:
 {
-  imports = [ inputs.anyrun.homeManagerModules.anyrun ];
+  imports = [ ];
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -34,7 +34,7 @@
         blur = {
           enabled = true;
         };
-        drop_shadow = false;
+        # drop_shadow = false;
       };
 
       animations = {
@@ -62,13 +62,14 @@
 
       bind = [
         # Application bindings
-        "$mod, Return, exec, kitty"
+        "$mod, Return, exec, ghostty"
         "$mod, E, exec, nautilus"
 
         # Window management
         "$mod, Q, killactive"
         "$mod, F, fullscreen"
         "$mod, P, pseudo"
+        "$mod, R, exec, rofi -show drun"
 
         # Hyprland control - QUIT BINDINGS
         "$mod SHIFT, E, exit"
@@ -155,7 +156,7 @@
 
       exec-once = [
         # Initialize swww daemon and set wallpaper
-        "swww-daemon && sleep 2 && swww img /persist/nixconf/wallpaper/wallpaper.gif --transition-type fade --transition-duration 2"
+        "swww-daemon && sleep 2 && swww img /persist/nixconf/wallpaper/wallpaper.gif"
 
         # Other startup apps
         "dunst"
@@ -185,38 +186,9 @@
 
     # File manager
     nautilus
+
+    rofi
   ];
-
-  programs.anyrun = {
-    enable = lib.mkForce true;
-    config = {
-      x = {
-        fraction = 0.5;
-      };
-      y = {
-        fraction = 0.3;
-      };
-      width = {
-        fraction = 0.3;
-      };
-      hideIcons = false;
-      ignoreExclusiveZones = false;
-      layer = "overlay";
-      hidePluginInfo = false;
-      closeOnClick = false;
-      showResultsImmediately = false;
-      maxEntries = null;
-
-      plugins = [
-        # An array of all the plugins you want, which either can be paths to the .so files, or their packages
-        "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/kidex"
-      ];
-    };
-
-    # Inline comments are supported for language injection into
-    # multi-line strings with Treesitter! (Depends on your editor)
-
-  };
 
   # Create Pictures directory
   home.file."Pictures/.keep".text = "";

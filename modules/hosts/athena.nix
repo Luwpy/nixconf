@@ -6,10 +6,11 @@
   pkgs,
   username,
   ...
-}: {
+}:
+{
   imports = [
     inputs.nixos-facter.nixosModules.facter
-    {config.facter.reportPath = ../../facter.athena.json;}
+    { config.facter.reportPath = ../../facter.athena.json; }
 
     ../home
     ../nixos/system.nix
@@ -29,7 +30,7 @@
     networkmanager.enable = true;
     firewall = {
       enable = true;
-      allowedTCPPorts = [22];
+      allowedTCPPorts = [ 22 ];
     };
 
     # Network optimizations for gaming/streaming
@@ -64,7 +65,7 @@
     ];
 
     # Load AMD GPU drivers early in boot
-    initrd.kernelModules = ["amdgpu"];
+    initrd.kernelModules = [ "amdgpu" ];
 
     # Performance optimizations
     kernel.sysctl = {
@@ -74,7 +75,7 @@
       "vm.dirty_background_ratio" = 5; # Background dirty page ratio
     };
 
-    supportedFilesystems = ["ntfs"];
+    supportedFilesystems = [ "ntfs" ];
   };
 
   # ==================== AMD HARDWARE CONFIGURATION ====================
@@ -142,7 +143,7 @@
     # Additional services for your AMD setup
     xserver = {
       enable = true;
-      videoDrivers = ["amdgpu"]; # Explicit AMD driver
+      videoDrivers = [ "amdgpu" ]; # Explicit AMD driver
     };
 
     # Hardware monitoring and management
@@ -179,7 +180,7 @@
 
   # ==================== USER CONFIGURATION ====================
   users.users.${username} = {
-    openssh.authorizedKeys.keys = [];
+    openssh.authorizedKeys.keys = [ ];
     shell = pkgs.zsh;
 
     extraGroups = [
@@ -202,7 +203,7 @@
     modules = [
       # Add these as you create them:
       ../home/git.nix
-      ../home/zsh.nix
+      ../home/fish.nix
       ../home/eza.nix
       ../home/hyprland.nix
       ../home/zed.nix
@@ -215,6 +216,8 @@
       discord
       vesktop
       spotify
+      revolt-desktop
+      vscode
 
       ripgrep
       fd

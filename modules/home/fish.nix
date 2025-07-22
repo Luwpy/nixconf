@@ -32,11 +32,6 @@
 
     bat.enable = true;
     lsd.enable = true;
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-      silent = true;
-    };
     fzf = {
       enable = true;
       #      fileWidgetOption = ["--preview 'bat --color=always {}'"];
