@@ -1,0 +1,3 @@
+{...}: {
+  myOption.enable = true;
+}
