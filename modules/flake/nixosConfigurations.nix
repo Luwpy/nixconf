@@ -12,7 +12,10 @@ in {
           inherit inputs username;
         };
         inherit system;
-        modules = [hostFile];
+        modules = [
+          hostFile
+          ../nixos/system.nix
+        ];
       };
 
     configs = builtins.listToAttrs (map (hostFile: {

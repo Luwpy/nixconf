@@ -38,6 +38,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+    nixcord.url = "github:kaylorben/nixcord";
   };
 
   outputs = {self, ...} @ inputs: let
