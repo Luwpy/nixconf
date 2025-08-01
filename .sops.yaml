@@ -1,9 +1,0 @@
-keys:
-  - &athena age1tmfenu0j7epykv2uuu8qugpy3fzpm7zvjgcwgc78z2ddjh74up5qthjwjc
-  - &hermes age18qjctqm7ulf6yqjvrrkmk5j9lf9yw4ljc3zq03429vdlu40wu38s27yhmv
-creation_rules:
-  - path_regex: (hosts|modules|secrets)/([^/]*/)?[a-zA-Z0-9]+[a-zA-Z0-9._-]*[a-zA-Z0-9]+.(yaml|yml)$
-    key_groups:
-      - age:
-          - *athena
-          - *hermes

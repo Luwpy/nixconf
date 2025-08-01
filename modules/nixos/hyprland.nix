@@ -1,3 +1,0 @@
-{...}: {
-  myOption.enable = true;
-}
