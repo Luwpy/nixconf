@@ -9,7 +9,7 @@
 let
 
 in
-{
+a {
   imports = [
     inputs.nixos-facter.nixosModules.facter
     { config.facter.reportPath = ../../facter.athena.json; }
