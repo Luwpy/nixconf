@@ -28,6 +28,7 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     nvf.url = "github:notashelf/nvf";
     anyrun = {
       url = "github:anyrun-org/anyrun";
