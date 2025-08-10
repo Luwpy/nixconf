@@ -35,7 +35,7 @@
   networking.hostName = lib.mkDefault "nixos";
 
   # Time and locale defaults
-  time.timeZone = lib.mkDefault "UTC";
+  services.automatic-timezoned.enable = true;
   console.keyMap = lib.mkDefault "us";
 
   # Internationalization
@@ -107,11 +107,11 @@
     package = lib.mkDefault pkgs.nixVersions.latest;
 
     # Automatic garbage collection
-    gc = {
-      automatic = lib.mkDefault true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
+    # gc = {
+    #   automatic = lib.mkDefault true;
+    #   dates = "weekly";
+    #   options = "--delete-older-than 7d";
+    # };
 
     settings = {
       # Enable flakes and new nix command

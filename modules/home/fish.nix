@@ -20,7 +20,7 @@
           format = "$symbol ";
         };
         hostname.format = "$hostname:";
-        username.format = "$user@";
+        username.format = "$user ";
       };
     };
 

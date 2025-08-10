@@ -6,11 +6,10 @@
   pkgs,
   username,
   ...
-}:
-{
+}: {
   imports = [
     inputs.nixos-facter.nixosModules.facter
-    { config.facter.reportPath = ../../facter.athena.json; }
+    {config.facter.reportPath = ../../facter.athena.json;}
 
     ../home
     ../nixos/system.nix
@@ -30,14 +29,14 @@
     networkmanager.enable = true;
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 22 ];
+      allowedTCPPorts = [22];
     };
 
     # Network optimizations for gaming/streaming
   };
 
   # ==================== LOCALE & TIME ====================
-  time.timeZone = "America/Sao_Paulo";
+  # time.timeZone = "America/Sao_Paulo";
   i18n.defaultLocale = "en_US.UTF-8";
 
   # ==================== AMD BOOT OPTIMIZATIONS ====================
@@ -60,12 +59,12 @@
 
     # Essential kernel modules for your hardware
     kernelModules = [
-      "amdgpu" # AMD GPU driver
+      "RADV" # AMD GPU driver
       "kvm-amd" # Virtualization support for Ryzen
     ];
 
     # Load AMD GPU drivers early in boot
-    initrd.kernelModules = [ "amdgpu" ];
+    initrd.kernelModules = ["amdgpu"];
 
     # Performance optimizations
     kernel.sysctl = {
@@ -75,7 +74,7 @@
       "vm.dirty_background_ratio" = 5; # Background dirty page ratio
     };
 
-    supportedFilesystems = [ "ntfs" ];
+    supportedFilesystems = ["ntfs"];
   };
 
   # ==================== AMD HARDWARE CONFIGURATION ====================
@@ -90,14 +89,14 @@
 
       # AMD-specific packages for RX 7600
       extraPackages = with pkgs; [
-        amdvlk # AMD's official Vulkan driver
-        libva # Video Acceleration API
-        libva-utils # VA-API utilities
+        vulkan-extension-layer
+        vulkan-validation-layers
+        mesa
       ];
 
       # 32-bit support for games
       extraPackages32 = with pkgs.pkgsi686Linux; [
-        amdvlk
+        mesa
       ];
     };
 
@@ -143,7 +142,7 @@
     # Additional services for your AMD setup
     xserver = {
       enable = true;
-      videoDrivers = [ "amdgpu" ]; # Explicit AMD driver
+      videoDrivers = ["amdgpu"]; # Explicit AMD driver
     };
 
     # Hardware monitoring and management
@@ -165,6 +164,12 @@
   # ==================== PERFORMANCE & GAMING ====================
   programs.gamemode.enable = true; # Automatic game optimizations
 
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
+    flake = "/home/user/my-nixos-config";
+  };
   # Security optimizations for real-time applications
   security = {
     rtkit.enable = true;
@@ -180,8 +185,8 @@
 
   # ==================== USER CONFIGURATION ====================
   users.users.${username} = {
-    openssh.authorizedKeys.keys = [ ];
-    shell = pkgs.zsh;
+    openssh.authorizedKeys.keys = [];
+    shell = pkgs.fish;
 
     extraGroups = [
       "audio"
@@ -195,7 +200,7 @@
     ];
   };
 
-  programs.zsh.enable = true;
+  programs.fish.enable = true;
 
   # ==================== MODULES ====================
   modules.home = {
@@ -221,7 +226,6 @@
 
       ripgrep
       fd
-      bat
       eza
       zoxide
 

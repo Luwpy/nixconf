@@ -25,6 +25,7 @@ in {
       enable = true;
       package = cfg.package;
       xwayland.enable = cfg.xwayland.enable;
+      # withUWSM = true;
     };
 
     xdg.portal = {
@@ -37,6 +38,7 @@ in {
 
     security = {
       polkit.enable = true;
+      rtkit.enable = true;
     };
 
     services = {
