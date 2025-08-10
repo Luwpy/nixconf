@@ -168,7 +168,7 @@
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep-since 4d --keep 3";
-    flake = "/home/user/my-nixos-config";
+    flake = "/persist/nixconf";
   };
   # Security optimizations for real-time applications
   security = {
@@ -202,6 +202,11 @@
 
   programs.fish.enable = true;
 
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    polkitPolicyOwners = ["@wheel"];
+  };
   # ==================== MODULES ====================
   modules.home = {
     enable = true;
