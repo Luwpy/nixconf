@@ -42,7 +42,7 @@
         {
           name = "check";
           help = "Check flake for issues";
-          command = "nix flake check";
+          command = "git add -A; nix flake check";
           category = "validation";
         }
         {

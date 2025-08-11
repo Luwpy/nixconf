@@ -16,6 +16,19 @@
       push.autoSetupRemote = true;
       color.ui = "1";
     };
+    ignores = [
+      ".cache/"
+      ".DS_Store"
+      ".idea/"
+      "*.swp"
+      "*.elc"
+      "auto-save-list"
+      ".direnv/"
+      "node_modules"
+      "result"
+      "result-*"
+    ];
+    aliases = {};
   };
 
   programs.lazygit.enable = true;

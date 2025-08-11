@@ -5,21 +5,23 @@
   pkgs,
   username,
   ...
-}:
-let
+}: let
   inherit (inputs.self.lib) importModulesRecursive;
 
   # Get all module paths from ../nixos directory
   nixosModules = importModulesRecursive ../nixos;
-in
-{
-  imports = nixosModules ++ [
-    inputs.nixos-facter.nixosModules.facter
-    { config.facter.reportPath = ../../facter.athena.json; }
+  homeSystemModules = importModulesRecursive ../home/system;
+  homePrograms = importModulesRecursive ../home/programs;
+in {
+  imports =
+    nixosModules
+    ++ [
+      inputs.nixos-facter.nixosModules.facter
+      {config.facter.reportPath = ../../facter.athena.json;}
 
-    ../disko
-    ../home
-  ];
+      ../disko
+      ../home
+    ];
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
@@ -34,7 +36,7 @@ in
     hostName = "athena";
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 22 ];
+      allowedTCPPorts = [22];
     };
   };
 
@@ -51,11 +53,22 @@ in
     home = {
       enable = true;
 
-      modules = [
-        ../home/fish.nix
-        ../home/git.nix
+      modules =
+        [
+        ]
+        ++ homeSystemModules ++ homePrograms;
+    };
 
-      ];
+    sops = {
+      enable = true;
+
+      age = {
+        keyFile = "/persist/age/key.txt";
+      };
+
+      secrets = {
+        athena_password.neededForUsers = true;
+      };
     };
 
     stylix = {
