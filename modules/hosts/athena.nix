@@ -48,6 +48,10 @@ in {
     enable32Bit = true;
   };
 
+  programs._1password.enable = true;
+  programs._1password-gui.enable = true;
+  programs._1password-gui.polkitPolicyOwners = ["@wheel" "${username}"];
+
   modules = {
     ############# HOME #############
     home = {
@@ -58,7 +62,7 @@ in {
         ]
         ++ homeSystemModules ++ homePrograms;
     };
-
+    ############# MODULES #############
     sops = {
       enable = true;
 

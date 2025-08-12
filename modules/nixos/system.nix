@@ -16,7 +16,7 @@
 
   environment.systemPackages = with pkgs; [nixd alejandra nix-output-monitor helix];
 
-  console.keyMap = "br";
+  console.keyMap = "br-abnt2";
 
   services.openssh = lib.mkDefault {
     enable = true;
