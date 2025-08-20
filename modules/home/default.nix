@@ -72,6 +72,8 @@ in {
         inherit inputs username;
       };
 
+      backupFileExtension = ".bak";
+
       users.${cfg.username} = {
         imports = cfg.modules;
 

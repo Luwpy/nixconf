@@ -26,6 +26,8 @@
     };
   };
 
+  security.polkit.enable = true;
+
   users = {
     mutableUsers = lib.mkDefault false;
     users.${username} = {

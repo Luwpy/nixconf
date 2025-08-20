@@ -17,9 +17,11 @@
     lib.filter (x: x != null) modules;
 
   core = importModulesRecursive ./core;
-  theme = importModulesRecursive ./theme;
+  assistant = importModulesRecursive ./assistant;
   plugins = importModulesRecursive ./plugins;
+  ui = importModulesRecursive ./ui;
+  utility = importModulesRecursive ./utility;
 in {
-  imports = core ++ theme ++ plugins;
+  imports = [] ++ core ++ assistant ++ plugins ++ ui ++ utility;
   vim.enableLuaLoader = true;
 }

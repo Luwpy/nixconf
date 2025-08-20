@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   config.vim = {
-    extraPackages = with pkgs; [ripgrep];
     telescope = {
       enable = true;
 

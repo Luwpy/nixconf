@@ -155,7 +155,7 @@ in {
       menus.dashboard.shortcuts.left.shortcut3.command = "night-shift";
       menus.dashboard.shortcuts.left.shortcut3.tooltip = "Night-shift";
       menus.dashboard.shortcuts.left.shortcut4.icon = "";
-      menus.dashboard.shortcuts.left.shortcut4.command = "menu";
+      menus.dashboard.shortcuts.left.shortcut4.command = "runner";
       menus.dashboard.shortcuts.left.shortcut4.tooltip = "Search Apps";
 
       menus.dashboard.shortcuts.right.shortcut1.icon = "";

@@ -9,7 +9,6 @@ in {
   imports = [
     ./bidings.nix
     ./animations.nix
-
     ./polkitagent.nix
   ];
 
@@ -90,7 +89,7 @@ in {
       };
 
       general = {
-        resize_on_border = true;
+        resize_on_border = false;
         gaps_in = 10;
         gaps_out = 10 * 2;
         layout = "master";
@@ -98,8 +97,8 @@ in {
       };
 
       decoration = {
-        active-opacity = 0.96;
-        inactive-opacity = 0.92;
+        active_opacity = 0.96;
+        inactive_opacity = 0.92;
         rounding = 20;
         shadow = {
           enabled = true;

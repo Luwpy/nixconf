@@ -7,8 +7,8 @@
 #- - `quickmenu` - Open a dropdown menu with shortcuts and scripts. (wofi)
 #- - `lock` - Lock the screen. (hyprlock)
 {pkgs, ...}: let
-  menu =
-    pkgs.writeShellScriptBin "menu"
+  runner =
+    pkgs.writeShellScriptBin "runner"
     # bash
     ''
       if pgrep wofi; then
@@ -116,4 +116,4 @@
     ''
       ${pkgs.hyprlock}/bin/hyprlock
     '';
-in {home.packages = [menu powermenu lock quickmenu];}
+in {home.packages = [runner powermenu lock quickmenu];}

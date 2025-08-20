@@ -8,6 +8,8 @@
   programs.fish = {
     enable = true;
     shellInit = ''
+      zoxide init fish --cmd cd | source
+
       nerdfetch
     '';
 
@@ -23,8 +25,13 @@
     };
   };
 
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
   home.packages = with pkgs; [
     eza
-    nerdfetch
+    bat
   ];
 }
