@@ -14,6 +14,13 @@
     boot.initrd.kernelModules = ["dm-snapshot"];
     boot.kernelModules = ["kvm-amd"];
     boot.extraModulePackages = [];
+    boot.supportedFilesystems = ["ntfs"];
+
+    fileSystems."/mnt/shared" = {
+      device = "/dev/disk/by-id/ata-SanDisk_SSD_PLUS_1000GB_243301A006CB-part4";
+      fsType = "ntfs3";
+      options = ["uid=1000" "gid=100" "dmask=007" "fmask=007" "nofail"];
+    };
 
     # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
     # (the default) this is the recommended approach. When using systemd-networkd it's

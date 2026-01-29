@@ -57,6 +57,8 @@
         self'.packages.git
         self'.packages.jujutsu
         self'.packages.jjui
+
+        self'.packages.starship
       ];
       env = {
         EDITOR = getExe self'.packages.neovimDynamic;

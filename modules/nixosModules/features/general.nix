@@ -14,10 +14,9 @@
       isNormalUser = true;
       description = "${config.preferences.user.name}'s account";
       extraGroups = ["wheel" "networkmanager"];
-      shell = self.packages.${pkgs.system}.environment;
+      shell = self.packages.${pkgs.stdenv.hostPlatform.system}.environment;
 
       hashedPasswordFile = "/persist/passwd";
-      initialPassword = "1726832";
     };
 
     persistance.data.directories = [

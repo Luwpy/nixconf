@@ -5,7 +5,7 @@
     ...
   }: let
     inherit (lib) getExe;
-    selfpkgs = self.packages."${pkgs.system}";
+    selfpkgs = self.packages."${pkgs.stdenv.hostPlatform.system}";
   in {
     imports = [
       self.nixosModules.gtk
@@ -13,6 +13,8 @@
 
       self.nixosModules.pipewire
       self.nixosModules.firefox
+      self.nixosModules.gemini-cli
+      self.nixosModules.fonts
       # self.nixosModules.chromium
     ];
 
@@ -58,9 +60,9 @@
       bluetooth.enable = false;
       bluetooth.powerOnBoot = false;
 
-      opengl = {
+      graphics = {
         enable = true;
-        driSupport32Bit = true;
+        enable32Bit = true;
       };
     };
   };

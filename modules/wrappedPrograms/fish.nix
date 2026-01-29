@@ -25,6 +25,8 @@ in {
         set fish_greeting
         fish_vi_key_bindings
 
+        ${aliasesStr}
+
         ${lib.getExe pkgs.zoxide} init fish | source
         ${lib.getExe self'.packages.starship} init fish | source
 
@@ -36,17 +38,30 @@ in {
             direnv hook fish | source
         end
       '';
+
+    aliasesStr = lib.concatStringsSep "\n" (
+      lib.mapAttrsToList (name: value: "alias ${name}='${value}'") aliases
+    );
+
+    aliases = {
+      ls = "eza --icons --group-directories-first";
+      ll = "eza -l --icons --group-directories-first";
+      la = "eza -la --icons --group-directories-first";
+      lt = "eza --tree --icons --group-directories-first";
+    };
   in {
     packages.fish = inputs.wrappers.lib.wrapPackage {
       inherit pkgs;
       package = pkgs.fish;
       runtimeInputs = [
         pkgs.zoxide
+        pkgs.bat
+        pkgs.eza
+        pkgs.fd
       ];
       flags = {
         "-C" = "source ${fishConf}";
       };
     };
-
-      };
+  };
 }

@@ -8,7 +8,7 @@
     inherit (lib) getExe mapAttrsToList;
 
     mod = "SUPER";
-    terminal = self.packages.${pkgs.system}.terminal;
+    terminal = self.packages.${pkgs.stdenv.hostPlatform.system}.terminal;
 
     # Helper para converter números de workspace (0-9) para tags (1-10)
     toTagID = n:
@@ -65,7 +65,7 @@
           "${mod}+SHIFT,Down,exchange_client,down"
 
           # Lançador de aplicativos
-          "${mod},S,spawn,${getExe self.packages.${pkgs.system}.noctalia-shell} ipc call launcher toggle"
+          "${mod},S,spawn,${getExe self.packages.${pkgs.stdenv.hostPlatform.system}.noctalia-shell} ipc call launcher toggle"
         ]
         # Geração dinâmica para troca de Tags (Workspaces)
         ++ (map (n: "${mod},${toString n},view,${toTagID n}") [1 2 3 4 5 6 7 8 9 0])

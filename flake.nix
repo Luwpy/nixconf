@@ -39,6 +39,9 @@
     };
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
+    claude-code.url = "github:sadjow/claude-code-nix";
+
+    # chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./modules);

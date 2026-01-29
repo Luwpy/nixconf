@@ -71,6 +71,13 @@ return {
         })
         vim.lsp.enable("nixd")
 
+        vim.lsp.config("gopls", {
+      on_attach = on_attach,
+      capabilities = capabilities
+    })
+  vim.lsp.config("gopls")
+
+
         -- ============================= VJXL ============================= --
 
         vim.lsp.config['parser4'] = {

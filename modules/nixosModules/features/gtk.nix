@@ -8,15 +8,13 @@
 
     theme-name = "rose-pine-moon";
     theme-package = pkgs.rose-pine-gtk-theme;
-
     icon-theme-package = pkgs.numix-icon-theme-circle;
-    icon-theme-name = "Numix-Circle";
+    icon-theme-name = "Numix Circle";
 
     gtksettings = ''
       [Settings]
-      gtk-icon-theme-name=${icon-theme-name}
-      gtk-theme-name=${theme-name}
-      gtk-application-prefer-dark-theme=1
+      gtk-icon-theme-name = ${icon-theme-name}
+      gtk-theme-name = ${theme-name}
     '';
   in {
     environment = {
@@ -27,7 +25,7 @@
     };
 
     environment.variables = {
-      GTK_THEME = "${theme-name}";
+      GTK_THEME = theme-name;
     };
 
     programs = {
@@ -52,12 +50,12 @@
       };
     };
 
-    environment.systemPackages = with pkgs; [
+    environment.systemPackages = [
       theme-package
       icon-theme-package
 
-      gtk3
-      gtk4
+      pkgs.gtk3
+      pkgs.gtk4
     ];
   };
 }
