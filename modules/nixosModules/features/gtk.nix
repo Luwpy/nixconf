@@ -6,7 +6,7 @@
   }: let
     inherit (lib) mkDefault;
 
-    theme-name = "rose-pine-gtk";
+    theme-name = "rose-pine-moon";
     theme-package = pkgs.rose-pine-gtk-theme;
 
     icon-theme-package = pkgs.numix-icon-theme-circle;
