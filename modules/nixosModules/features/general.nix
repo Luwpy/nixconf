@@ -28,5 +28,11 @@
 
       ".ssh"
     ];
+
+    persistance.data.files = [
+      "city"
+    ];
+
+    environment.etc."city".text = "São Paulo, Brazil";
   };
 }

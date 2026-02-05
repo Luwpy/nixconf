@@ -40,7 +40,7 @@
       loader.grub.efiInstallAsRemovable = true;
       loader.grub.useOSProber = true;
 
-      kernelParams = ["quiet" "amd_pstate=active"];
+      kernelParams = ["quiet" "amd_pstate=guided"];
       kernelModules = ["coretemp" "cpuid" "v2l4loopback"];
       extraModulePackages = [pkgs.linuxPackages_zen.v4l2loopback];
     };
@@ -60,6 +60,14 @@
     };
 
     hardware.cpu.amd.updateMicrocode = true;
+    hardware.amdgpu = {
+      initrd.enable = true;
+      legacySupport.enable = true;
+
+      opencl.enable = true;
+    };
+
+    boot.blacklistedKernelModules = ["radeon"];
     powerManagement.cpuFreqGovernor = "performance";
 
     services = {
@@ -90,10 +98,18 @@
     xdg.portal.extraPortals = [
       pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal-wlr
+      pkgs.xdg-desktop-portal-gnome
     ];
     xdg.portal.enable = true;
 
-    hardware.graphics.enable = true;
+    hardware.graphics = {
+      enable = true;
+      enable32Bit = true;
+      extraPackages = with pkgs; [
+        mesa
+        vulkan-tools
+      ];
+    };
 
     networking.firewall.enable = false;
     programs.appimage.enable = true;

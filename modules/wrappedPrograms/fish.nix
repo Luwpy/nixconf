@@ -14,6 +14,18 @@ in {
     ...
   }: let
     lf = self'.packages.lf;
+
+    aliases = {
+      ls = "eza --icons --group-directories-first";
+      ll = "eza -l --icons --group-directories-first";
+      la = "eza -la --icons --group-directories-first";
+      lt = "eza --tree --icons --group-directories-first";
+    };
+
+    aliasesStr = lib.concatStringsSep "\n" (
+      lib.mapAttrsToList (name: value: "alias ${name}='${value}'") aliases
+    );
+
     fishConf =
       pkgs.writeText "fishy-fishy"
       # fish
@@ -38,17 +50,6 @@ in {
             direnv hook fish | source
         end
       '';
-
-    aliasesStr = lib.concatStringsSep "\n" (
-      lib.mapAttrsToList (name: value: "alias ${name}='${value}'") aliases
-    );
-
-    aliases = {
-      ls = "eza --icons --group-directories-first";
-      ll = "eza -l --icons --group-directories-first";
-      la = "eza -la --icons --group-directories-first";
-      lt = "eza --tree --icons --group-directories-first";
-    };
   in {
     packages.fish = inputs.wrappers.lib.wrapPackage {
       inherit pkgs;

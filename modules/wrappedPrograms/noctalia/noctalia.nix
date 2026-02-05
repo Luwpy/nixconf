@@ -84,6 +84,9 @@ in {
               showUnreadBadge = true;
             }
             {
+              id = "PowerProfile";
+            }
+            {
               displayMode = "alwaysHide";
               id = "Volume";
             }
@@ -237,7 +240,7 @@ in {
         allowPanelsOnScreenWithoutBar = true;
         animationDisabled = false;
         animationSpeed = 1;
-        avatarImage = wallpaper;
+        avatarImage = "${wallpaperDir}/min-linux.jpg";
         boxRadiusRatio = 1;
         compactLockScreen = false;
         dimmerOpacity = 0.15;
@@ -472,15 +475,7 @@ in {
 
     noctalia-shell = inputs.wrappers.lib.wrapPackage {
       inherit pkgs;
-      package = pkgs.noctalia-shell.overrideAttrs (final: prev: {
-        version = "3.8.0";
-        src = pkgs.fetchFromGitHub {
-          owner = "noctalia-dev";
-          repo = "noctalia-shell";
-          tag = "v3.8.0";
-          hash = "sha256-Bh4XcEyG6XRQugahL/2Vd42k/YeGK0f+yW3+Oc74Rp4=";
-        };
-      });
+      package = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
       env = {
         "NOCTALIA_SETTINGS_FILE" =
           pkgs.writeText "config.json" (builtins.toJSON settings);
@@ -494,6 +489,10 @@ in {
         CITY_FILE=/persist/city
 
         if [ -f "$CITY_FILE" ]; then
+          sleep 5
+          ${getExe noctalia-shell} ipc call location set "$(cat "$CITY_FILE")"
+        elif [ -f /etc/city ]; then
+          cp /etc/city "$CITY_FILE"
           sleep 5
           ${getExe noctalia-shell} ipc call location set "$(cat "$CITY_FILE")"
         else

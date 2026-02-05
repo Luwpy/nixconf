@@ -88,7 +88,8 @@ in {
             "Mod+Shift+9".move-column-to-workspace = "w8";
             "Mod+Shift+0".move-column-to-workspace = "w9";
 
-            "Mod+S".spawn-sh = "noctalia-shell ipc call launcher toggle";
+            "Mod+S".spawn-sh = "${getExe self'.packages.noctalia-shell} ipc call launcher toggle";
+            "Mod+Alt+L".spawn-sh = "${getExe self'.packages.noctalia-shell} ipc call globalIPC toggleLock";
             "Mod+V".spawn-sh = ''${pkgs.alsa-utils}/bin/amixer sset Capture toggle'';
 
             "XF86AudioRaiseVolume".spawn-sh = "wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+";
@@ -120,12 +121,12 @@ in {
               {
                 key = "b";
                 desc = "Bluetooth";
-                cmd = "noctalia-shell ipc call bluetooth togglePanel";
+                cmd = "${getExe self'.packages.noctalia-shell} ipc call bluetooth togglePanel";
               }
               {
                 key = "w";
                 desc = "Wifi";
-                cmd = "noctalia-shell ipc call wifi togglePanel";
+                cmd = "${getExe self'.packages.noctalia-shell} ipc call wifi togglePanel";
               }
               {
                 key = "f";
@@ -144,8 +145,8 @@ in {
               }
               {
                 key = "m";
-                desc = "Youtube Music";
-                cmd = "pear-desktop";
+                desc = "Spotify";
+                cmd = "spotify";
               }
             ];
           };

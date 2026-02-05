@@ -38,8 +38,7 @@ in {
             "alt+8 goto_tab 8"
             "alt+9 goto_tab 9"
             "ctrl+shift+w close_tab"
-            "ctrl+t new_tab_with_cwd"
-            "ctrl+shift+t new_tab"
+            "ctrl+shift+t new_tab_with_cwd"
           ];
 
           background = theme.base00;

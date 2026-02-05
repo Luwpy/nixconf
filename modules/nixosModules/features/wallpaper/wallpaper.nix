@@ -7,10 +7,7 @@
     inherit (lib) getExe;
   in {
     preferences.autostart = [
-      ''
-        ${pkgs.swww}/bin/swww-daemon &
-        ${getExe pkgs.swww} img ${./min-linux.jpg} &
-      ''
+      # Wallpaper managed by Noctalia via settings
     ];
   };
 }

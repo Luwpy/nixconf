@@ -44,6 +44,17 @@ return {
         })
         vim.lsp.enable("ts_ls")
 
+        vim.lsp.config("astro", {
+            on_attach = on_attach,
+            capabilities = capabilities,
+            init_options = {
+                typescript = {
+                    tsdk = "node_modules/typescript/lib",
+                }
+            },
+        })
+        vim.lsp.enable("astro")
+
         vim.lsp.config("qmlls", {
             cmd = { "qmlls", "-E" },
             on_attach = on_attach,
@@ -70,23 +81,5 @@ return {
             },
         })
         vim.lsp.enable("nixd")
-
-        vim.lsp.config("gopls", {
-      on_attach = on_attach,
-      capabilities = capabilities
-    })
-  vim.lsp.config("gopls")
-
-
-        -- ============================= VJXL ============================= --
-
-        vim.lsp.config['parser4'] = {
-            cmd = { '/home/luwpy/Videos/parser4/target/release/parser4', 'lsp' },
-            filetypes = { 'vjxl' },
-            root_markers = { '.git' },
-            root_dir = vim.fn.getcwd(),
-        }
-        vim.lsp.config("parser4", { on_attach = on_attach, capabilities = capabilities })
-        vim.lsp.enable('parser4')
     end,
 }

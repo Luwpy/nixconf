@@ -63,17 +63,11 @@ in {
 
     config.specs.start = let
       p = pkgs.vimPlugins;
-      vjxl-grammar = pkgs.tree-sitter.buildGrammar {
-        language = "vjxl";
-        version = "0.0.1";
-        src = ./vjxl-ts;
-      };
     in [
       p.lz-n
       p.plenary-nvim
       p.nvim-lspconfig
       p.nvim-treesitter.withAllGrammars
-      (p.nvim-treesitter.grammarToPlugin vjxl-grammar)
 
       # completion
       p.nvim-web-devicons

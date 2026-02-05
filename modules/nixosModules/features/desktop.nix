@@ -1,7 +1,8 @@
-{self, ...}: {
+{self, inputs, ...}: {
   flake.nixosModules.desktop = {
     pkgs,
     lib,
+    config,
     ...
   }: let
     inherit (lib) getExe;
@@ -27,7 +28,21 @@
       selfpkgs.terminal
       pkgs.pcmanfm
       selfpkgs.noctalia-bundle
+      pkgs.swayidle
     ];
+
+    systemd.user.services.swayidle = {
+      wantedBy = ["graphical-session.target"];
+      serviceConfig = {
+        ExecStart = ''${getExe pkgs.swayidle} -w \
+          timeout 300 '${getExe selfpkgs.noctalia-shell} ipc call globalIPC toggleLock' \
+          timeout 600 'hyprctl dispatch dpms off' \
+          resume 'hyprctl dispatch dpms on' \
+          before-sleep '${getExe selfpkgs.noctalia-shell} ipc call globalIPC toggleLock' \
+          lock '${getExe selfpkgs.noctalia-shell} ipc call globalIPC toggleLock' '';
+        Restart = "on-failure";
+      };
+    };
 
     fonts.packages = with pkgs; [
       nerd-fonts.comic-shanns-mono
