@@ -40,7 +40,11 @@
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     claude-code.url = "github:sadjow/claude-code-nix";
-
+    
+    jj-starship = {
+  url = "github:dmmulroy/jj-starship";
+  inputs.nixpkgs.follows = "nixpkgs";
+};
     # chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
   };
 

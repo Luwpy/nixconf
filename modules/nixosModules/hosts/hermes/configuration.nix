@@ -19,6 +19,7 @@
       inputs.nixos-wsl.nixosModules.default
       self.nixosModules.general
       self.nixosModules.base
+      self.nixosModules.gemini-cli
     ];
 
     networking.hostName = "hermes";
