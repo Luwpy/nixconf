@@ -18,6 +18,8 @@ in {
         settings = {
           enable_audio_bell = "no";
 
+          font_family = "ComicShannsMono Nerd Font Mono";
+
           font_size = 15;
 
           cursor_text_color = "background";

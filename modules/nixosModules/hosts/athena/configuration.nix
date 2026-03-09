@@ -52,7 +52,6 @@
       networkmanager.enable = true;
     };
 
-    virtualisation.libvirtd.enable = true;
     virtualisation.podman = {
       enable = true;
       dockerCompat = true;
@@ -93,7 +92,10 @@
       libreoffice-fresh
 
       warp-terminal
+
+      uv
     ];
+    environment.localBinInPath = true;
 
     xdg.portal.extraPortals = [
       pkgs.xdg-desktop-portal-gtk
@@ -130,6 +132,7 @@
 
     persistance.data.directories = [
       ".config/1password"
+      ".config/1Passoword"
     ];
 
     services.xserver.videoDrivers = ["amdgpu"];

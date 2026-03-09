@@ -14,87 +14,29 @@ in {
       add_newline = true
       continuation_prompt = "[▸▹ ](dimmed #${theme.base07})"
 
-      format = """($custom$container$fill$git_metrics\n)$cmd_duration\
-      $hostname\
-      $localip\
-      $shlvl\
-      $shell\
-      $env_var\
+      format = """($custom$fill$git_metrics\n)$cmd_duration\
       $jobs\
       $sudo\
       $username\
       $character"""
 
       right_format = """
-      $singularity\
-      $kubernetes\
       $directory\
-      $vcsh\
-      $fossil_branch\
-      $pijul_channel\
+      $nix_shell\
       $docker_context\
       $package\
       $c\
       $cpp\
-      $cmake\
-      $cobol\
-      $daml\
-      $dart\
-      $deno\
-      $dotnet\
-      $elixir\
-      $elm\
-      $erlang\
-      $fennel\
-      $fortran\
       $golang\
-      $guix_shell\
-      $haskell\
-      $haxe\
-      $helm\
+      $nodejs\
+      $deno\
+      $lua\
+      $python\
+      $rust\
       $java\
       $julia\
-      $kotlin\
-      $gradle\
-      $lua\
-      $nim\
-      $nodejs\
-      $ocaml\
-      $opa\
-      $perl\
-      $php\
-      $pulumi\
-      $purescript\
-      $python\
-      $raku\
-      $rlang\
-      $red\
-      $ruby\
-      $rust\
-      $scala\
-      $solidity\
-      $swift\
-      $terraform\
-      $vlang\
-      $vagrant\
-      $xmake\
-      $zig\
-      $buf\
-      $conda\
-      $pixi\
-      $meson\
-      $spack\
-      $memory_usage\
-      $aws\
-      $gcloud\
-      $openstack\
-      $azure\
-      $crystal\
-      $custom\
       $status\
-      $os\
-      $battery\
-      $time"""
+      $os"""
 
       [fill]
       symbol = ' '
@@ -107,10 +49,6 @@ in {
       vimcmd_replace_one_symbol = "◌"
       vimcmd_replace_symbol = "□"
       vimcmd_visual_symbol = "▼"
-
-      [env_var.VIMSHELL]
-      format = "[$env_value]($style)"
-      style = "italic #${theme.base0B}"
 
       [sudo]
       format = "[$symbol]($style)"
@@ -143,38 +81,6 @@ in {
       format = "[$symbol$number]($style) "
       style = "#${theme.base07}"
       symbol = "[▶](italic #${theme.base0D})"
-
-      [localip]
-      ssh_only = true
-      format = " ◯[$localipv4](bold #${theme.base0E})"
-      disabled = false
-
-      [time]
-      disabled = false
-      format = "[ $time]($style)"
-      time_format = "%R"
-      utc_time_offset = "local"
-      style = "italic dimmed #${theme.base07}"
-
-      [battery]
-      format = "[ $percentage $symbol]($style)"
-      full_symbol = "█"
-      charging_symbol = "[↑](italic bold #${theme.base0B})"
-      discharging_symbol = "↓"
-      unknown_symbol = "░"
-      empty_symbol = "▃"
-
-      [[battery.display]]
-      threshold = 20
-      style = "italic bold #${theme.base08}"
-
-      [[battery.display]]
-      threshold = 60
-      style = "italic dimmed #${theme.base0E}"
-
-      [[battery.display]]
-      threshold = 70
-      style = "italic dimmed #${theme.base0A}"
 
       # ── Git modules desabilitados — jj-starship cuida de tudo ──────────────
 
@@ -227,12 +133,6 @@ in {
       version_format = "''${raw}"
       style = "bold #${theme.base0A}"
 
-      [ruby]
-      format = " [rb](italic) [''${symbol}''${version}]($style)"
-      symbol = "◆ "
-      version_format = "''${raw}"
-      style = "bold #${theme.base08}"
-
       [rust]
       format = " [rs](italic) [$symbol$version]($style)"
       symbol = "⊃ "
@@ -245,61 +145,9 @@ in {
       symbol = "◨ "
       style = "dimmed italic bold #${theme.base0A}"
 
-      [swift]
-      format = " [sw](italic) [''${symbol}''${version}]($style)"
-      symbol = "◁ "
-      style = "bold #${theme.base08}"
-      version_format = "''${raw}"
-
-      [aws]
-      disabled = true
-      format = " [aws](italic) [$symbol $profile $region]($style)"
-      style = "bold #${theme.base0D}"
-      symbol = "▲ "
-
-      [buf]
-      symbol = "■ "
-      format = " [buf](italic) [$symbol $version $buf_version]($style)"
-
-      [c]
-      symbol = "ℂ "
-      format = " [$symbol($version(-$name))]($style)"
-
-      [cpp]
-      symbol = "ℂ "
-      format = " [$symbol($version(-$name))]($style)"
-
-      [conda]
-      symbol = "◯ "
-      format = " conda [$symbol$environment]($style)"
-
-      [pixi]
-      symbol = "■ "
-      format = " pixi [$symbol$version ($environment )]($style)"
-
-      [dart]
-      symbol = "◁◅ "
-      format = " dart [$symbol($version )]($style)"
-
-      [docker_context]
-      symbol = "◧ "
-      format = " docker [$symbol$context]($style)"
-
-      [elixir]
-      symbol = "△ "
-      format = " exs [$symbol $version OTP $otp_version ]($style)"
-
-      [elm]
-      symbol = "◩ "
-      format = " elm [$symbol($version )]($style)"
-
       [golang]
       symbol = "∩ "
       format = " go [$symbol($version )]($style)"
-
-      [haskell]
-      symbol = "❯λ "
-      format = " hs [$symbol($version )]($style)"
 
       [java]
       symbol = "∪ "
@@ -309,13 +157,17 @@ in {
       symbol = "◎ "
       format = " jl [$symbol($version )]($style)"
 
-      [memory_usage]
-      symbol = "▪▫▪ "
-      format = " mem [''${ram}( ''${swap})]($style)"
+      [c]
+      symbol = "ℂ "
+      format = " [$symbol($version(-$name))]($style)"
 
-      [nim]
-      symbol = "▴▲▴ "
-      format = " nim [$symbol($version )]($style)"
+      [cpp]
+      symbol = "ℂ "
+      format = " [$symbol($version(-$name))]($style)"
+
+      [docker_context]
+      symbol = "◧ "
+      format = " docker [$symbol$context]($style)"
 
       [nix_shell]
       style = "bold italic dimmed #${theme.base0D}"
@@ -324,10 +176,6 @@ in {
       impure_msg = "[⌽](bold dimmed #${theme.base08})"
       pure_msg = "[⌾](bold dimmed #${theme.base0B})"
       unknown_msg = "[◌](bold dimmed #${theme.base0A})"
-
-      [spack]
-      symbol = "◇ "
-      format = " spack [$symbol$environment]($style)"
     '';
   in {
     packages.starship = inputs.wrappers.lib.wrapPackage {

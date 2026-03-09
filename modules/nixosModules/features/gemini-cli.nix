@@ -7,7 +7,15 @@
   }: {
     environment.systemPackages = [
       pkgs.gemini-cli-bin
-      pkgs.opencode
+      pkgs.claude-code
+    ];
+
+    persistance.data.directories = [
+    ".claude"
+    ];
+
+    persistance.cache.directories = [
+    ".cache/claude"
     ];
   };
 }
