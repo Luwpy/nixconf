@@ -50,15 +50,15 @@ in {
       containers = ["~/Projects"]
       markers = [".vjenv-root", ".VJCROOT"]
 
-      [identities.goxore]
-      name = "Yurii"
-      email = "yurii@goxore.com"
+      [identities.castro]
+      name = "Castro"
+      email = "jpcastro.sp@gmail.com"
       ssh_key = "~/.ssh/primary"
 
-      [identities.vimjoyer]
-      name = "Vimjoyer"
-      email = "vimjoyer@gmail.com"
-      ssh_key = "~/.ssh/id_rsa_vimjoyer"
+      [identities.luwpy]
+      name = "Luwpy"
+      email = "nerdboom09@gmail.com"
+      ssh_key = "~/.ssh/id_rsa_luwpy"
     '';
 
     unwrapped = pkgs.rustPlatform.buildRustPackage {

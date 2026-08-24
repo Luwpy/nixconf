@@ -158,9 +158,9 @@ mod tests {
 
     fn full() -> Identity {
         Identity {
-            name: Some("Vimjoyer".into()),
-            email: Some("vimjoyer@gmail.com".into()),
-            ssh_key: Some(PathBuf::from("/h/.ssh/id_rsa_vimjoyer")),
+            name: Some("Luwpy".into()),
+            email: Some("nerdboom09@gmail.com".into()),
+            ssh_key: Some(PathBuf::from("/h/.ssh/id_rsa_luwpy")),
         }
     }
 
@@ -169,7 +169,7 @@ mod tests {
         env_ops(&Context {
             dirs: &d,
             root: Some(Path::new("/h/Projects/secretspec")),
-            id: identity.map(|_| "vimjoyer"),
+            id: identity.map(|_| "luwpy"),
             identity,
             pinned: false,
             jj_config_current: jj_current,
@@ -206,21 +206,21 @@ mod tests {
     #[test]
     fn a_full_identity_populates_all_three_git_slots() {
         let ops = ops_for(Some(&full()), None);
-        assert_eq!(value(&ops, "VJENV_IDENTITY"), Some("vimjoyer"));
+        assert_eq!(value(&ops, "VJENV_IDENTITY"), Some("luwpy"));
         assert_eq!(value(&ops, "VJENV_ROOT"), Some("/h/Projects/secretspec"));
         assert_eq!(value(&ops, "GIT_CONFIG_COUNT"), Some("3"));
         assert_eq!(value(&ops, "GIT_CONFIG_KEY_0"), Some("user.name"));
-        assert_eq!(value(&ops, "GIT_CONFIG_VALUE_0"), Some("Vimjoyer"));
+        assert_eq!(value(&ops, "GIT_CONFIG_VALUE_0"), Some("Luwpy"));
         assert_eq!(value(&ops, "GIT_CONFIG_KEY_1"), Some("user.email"));
-        assert_eq!(value(&ops, "GIT_CONFIG_VALUE_1"), Some("vimjoyer@gmail.com"));
+        assert_eq!(value(&ops, "GIT_CONFIG_VALUE_1"), Some("nerdboom09@gmail.com"));
         assert_eq!(value(&ops, "GIT_CONFIG_KEY_2"), Some("core.sshCommand"));
         assert_eq!(
             value(&ops, "GIT_SSH_COMMAND"),
-            Some("ssh -i /h/.ssh/id_rsa_vimjoyer -o IdentitiesOnly=yes")
+            Some("ssh -i /h/.ssh/id_rsa_luwpy -o IdentitiesOnly=yes")
         );
         assert_eq!(
             value(&ops, "GH_CONFIG_DIR"),
-            Some("/h/.local/share/vjenv/vimjoyer/gh")
+            Some("/h/.local/share/vjenv/luwpy/gh")
         );
         assert!(is_unset(&ops, "VJENV_PINNED"));
     }
@@ -266,7 +266,7 @@ mod tests {
         let ops = env_ops(&Context {
             dirs: &d,
             root: Some(Path::new("/h/Projects/secretspec")),
-            id: Some("vimjoyer"),
+            id: Some("luwpy"),
             identity: Some(&id),
             pinned: true,
             jj_config_current: None,
@@ -279,7 +279,7 @@ mod tests {
         let ops = ops_for(Some(&full()), Some("/nix/store/abc-jj/jj-config.toml"));
         assert_eq!(
             value(&ops, "JJ_CONFIG"),
-            Some("/nix/store/abc-jj/jj-config.toml:/run/user/1000/vjenv/vimjoyer.jj.toml")
+            Some("/nix/store/abc-jj/jj-config.toml:/run/user/1000/vjenv/luwpy.jj.toml")
         );
     }
 
@@ -287,11 +287,11 @@ mod tests {
     fn a_previous_identity_fragment_is_stripped_rather_than_stacked() {
         let ops = ops_for(
             Some(&full()),
-            Some("/nix/store/abc-jj/jj-config.toml:/run/user/1000/vjenv/goxore.jj.toml"),
+            Some("/nix/store/abc-jj/jj-config.toml:/run/user/1000/vjenv/castro.jj.toml"),
         );
         assert_eq!(
             value(&ops, "JJ_CONFIG"),
-            Some("/nix/store/abc-jj/jj-config.toml:/run/user/1000/vjenv/vimjoyer.jj.toml")
+            Some("/nix/store/abc-jj/jj-config.toml:/run/user/1000/vjenv/luwpy.jj.toml")
         );
     }
 
@@ -299,7 +299,7 @@ mod tests {
     fn dropping_the_identity_restores_the_bare_base() {
         let ops = ops_for(
             None,
-            Some("/nix/store/abc-jj/jj-config.toml:/run/user/1000/vjenv/goxore.jj.toml"),
+            Some("/nix/store/abc-jj/jj-config.toml:/run/user/1000/vjenv/castro.jj.toml"),
         );
         assert_eq!(
             value(&ops, "JJ_CONFIG"),
@@ -312,7 +312,7 @@ mod tests {
         let rt = Path::new("/run/user/1000/vjenv");
         assert_eq!(jj_base(None, rt), None);
         assert_eq!(jj_base(Some(""), rt), None);
-        assert_eq!(jj_base(Some("/run/user/1000/vjenv/goxore.jj.toml"), rt), None);
+        assert_eq!(jj_base(Some("/run/user/1000/vjenv/castro.jj.toml"), rt), None);
         assert_eq!(jj_base(Some("/a:/b"), rt), Some("/a:/b".into()));
         assert_eq!(jj_base(Some("/a::/b"), rt), Some("/a:/b".into()));
     }

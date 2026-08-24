@@ -100,7 +100,7 @@ mod tests {
 
     #[test]
     fn tilde_expands_only_for_home_itself() {
-        let home = Path::new("/home/yurii");
+        let home = Path::new("/home/luwpy");
         assert_eq!(expand_tilde("~", home), home);
         assert_eq!(expand_tilde("~/nixconf", home), home.join("nixconf"));
         assert_eq!(expand_tilde("/abs/path", home), Path::new("/abs/path"));
@@ -140,7 +140,7 @@ mod tests {
         assert_eq!(d.identity_toml(), Path::new("/h/.config/vjenv/identity.toml"));
         assert_eq!(d.registry(), Path::new("/h/.local/state/vjenv/projects.toml"));
         assert_eq!(d.devshell(), Path::new("/h/.local/state/vjenv/devshell"));
-        assert_eq!(d.jj_config("goxore"), Path::new("/run/user/1/vjenv/goxore.jj.toml"));
-        assert_eq!(d.gh_config("goxore"), Path::new("/h/.local/share/vjenv/goxore/gh"));
+        assert_eq!(d.jj_config("castro"), Path::new("/run/user/1/vjenv/castro.jj.toml"));
+        assert_eq!(d.gh_config("castro"), Path::new("/h/.local/share/vjenv/castro/gh"));
     }
 }

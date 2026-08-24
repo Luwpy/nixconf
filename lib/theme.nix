@@ -1,21 +1,22 @@
 {lib, ...}: let
+  # Solitude — https://github.com/HANCORE-linux/omarchy-solitude-theme
   theme = {
-    base00 = "#181818"; # bg
-    base01 = "#282828"; # dark
-    base02 = "#3c3836";
-    base03 = "#504945";
-    base04 = "#bdae93";
-    base05 = "#d5c4a1";
-    base06 = "#ebdbb2"; # fg
-    base07 = "#fbf1c7"; # light fg
-    base08 = "#fb4934"; # red
-    base09 = "#fe8019"; # orange
-    base0A = "#fabd2f"; # yellow
-    base0B = "#b8bb26"; # green
-    base0C = "#8ec07c"; # cyan
-    base0D = "#7daea3"; # blue
-    base0E = "#e089a1"; # magenta
-    base0F = "#f28534"; # orange
+    base00 = "#101315"; # bg
+    base01 = "#1e1e1e"; # darkest surface
+    base02 = "#2f353b"; # surface / borders
+    base03 = "#4b4e55"; # muted / comments
+    base04 = "#707070"; # gray
+    base05 = "#9fa5a9"; # mid fg
+    base06 = "#cacccc"; # fg
+    base07 = "#d9dbdc"; # light fg
+    base08 = "#de6145"; # red / rust accent
+    base09 = "#c9c2b4"; # warm sand
+    base0A = "#cbc2be"; # beige
+    base0B = "#9fa5a9"; # sage green
+    base0C = "#a8adb0"; # light steel highlight
+    base0D = "#798186"; # steel blue accent
+    base0E = "#aeaeae"; # silver
+    base0F = "#565d60"; # deep slate
   };
 
   stripHash = str:
@@ -32,7 +33,7 @@
       lib.toLower (lib.fixedWidthString 2 "0" (lib.toHexString (value * (100 - percent) / 100)));
   in "#${channel 0}${channel 2}${channel 4}";
   cursor = {
-    name = "Bibata-Gruvbox";
+    name = "Bibata-Solitude";
     size = 24;
   };
 in {

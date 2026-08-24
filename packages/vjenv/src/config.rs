@@ -137,19 +137,19 @@ mod tests {
         containers = ["~/Projects"]
         markers = [".vjenv-root", ".VJCROOT"]
 
-        [identities.goxore]
-        name = "Yurii"
-        email = "yurii@goxore.com"
+        [identities.castro]
+        name = "Castro"
+        email = "jpcastro.sp@gmail.com"
         ssh_key = "~/.ssh/primary"
 
-        [identities.vimjoyer]
-        name = "Vimjoyer"
-        email = "vimjoyer@gmail.com"
-        ssh_key = "~/.ssh/id_rsa_vimjoyer"
+        [identities.luwpy]
+        name = "Luwpy"
+        email = "nerdboom09@gmail.com"
+        ssh_key = "~/.ssh/id_rsa_luwpy"
     "#;
 
     fn sample() -> Config {
-        Config::parse(SAMPLE, Path::new("/home/yurii")).unwrap()
+        Config::parse(SAMPLE, Path::new("/home/luwpy")).unwrap()
     }
 
     #[test]
@@ -158,27 +158,27 @@ mod tests {
         assert_eq!(
             c.roots.standalone,
             vec![
-                PathBuf::from("/home/yurii/NewVideos"),
-                PathBuf::from("/home/yurii/nixconf")
+                PathBuf::from("/home/luwpy/NewVideos"),
+                PathBuf::from("/home/luwpy/nixconf")
             ]
         );
-        assert_eq!(c.roots.containers, vec![PathBuf::from("/home/yurii/Projects")]);
+        assert_eq!(c.roots.containers, vec![PathBuf::from("/home/luwpy/Projects")]);
         assert_eq!(c.roots.markers, vec![".vjenv-root", ".VJCROOT"]);
     }
 
     #[test]
     fn parses_identities() {
         let c = sample();
-        assert_eq!(c.identity_names(), vec!["goxore", "vimjoyer"]);
-        let g = c.identity("goxore").unwrap();
-        assert_eq!(g.name.as_deref(), Some("Yurii"));
-        assert_eq!(g.email.as_deref(), Some("yurii@goxore.com"));
-        assert_eq!(g.ssh_key, Some(PathBuf::from("/home/yurii/.ssh/primary")));
+        assert_eq!(c.identity_names(), vec!["castro", "luwpy"]);
+        let g = c.identity("castro").unwrap();
+        assert_eq!(g.name.as_deref(), Some("Castro"));
+        assert_eq!(g.email.as_deref(), Some("jpcastro.sp@gmail.com"));
+        assert_eq!(g.ssh_key, Some(PathBuf::from("/home/luwpy/.ssh/primary")));
     }
 
     #[test]
     fn empty_config_is_valid_and_yields_nothing() {
-        let c = Config::parse("", Path::new("/home/yurii")).unwrap();
+        let c = Config::parse("", Path::new("/home/luwpy")).unwrap();
         assert!(c.identities.is_empty());
         assert!(c.roots.standalone.is_empty());
     }

@@ -18,12 +18,11 @@ PanelWindow {
     anchors {
         top: true
         bottom: true
-        left: Style.barOnLeft
-        right: !Style.barOnLeft
+        left: true
+        right: true
     }
     exclusiveZone: 0
 
-    implicitWidth: 240
     color: "transparent"
 
     WlrLayershell.layer: WlrLayer.Overlay
@@ -41,8 +40,8 @@ PanelWindow {
     Surface {
         id: box
 
-        x: Style.barOnLeft ? Style.spacing + 8 * reveal.progress : parent.width - width - Style.spacing - 8 * reveal.progress
-        y: Math.max(Style.spacing, Math.min(TooltipService.anchorY - height / 2, parent.height - height - Style.spacing))
+        x: Style.barOnTop ? Math.max(Style.spacing, Math.min(TooltipService.anchorX - width / 2, parent.width - width - Style.spacing)) : Style.barOnLeft ? Style.spacing + 8 * reveal.progress : parent.width - width - Style.spacing - 8 * reveal.progress
+        y: Style.barOnTop ? Style.barWidth + Style.spacing + 8 * reveal.progress : Math.max(Style.spacing, Math.min(TooltipService.anchorY - height / 2, parent.height - height - Style.spacing))
 
         width: label.implicitWidth + Style.panelPadding * 2
         height: label.implicitHeight + Style.spacing * 2

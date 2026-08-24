@@ -86,7 +86,7 @@ mod tests {
         "--flag",
         "",
         "emoji 🐟 and ünïcode",
-        "ssh -i /home/yurii/.ssh/id_rsa -o IdentitiesOnly=yes",
+        "ssh -i /home/luwpy/.ssh/id_rsa -o IdentitiesOnly=yes",
     ];
 
     fn unquote(quoted: &str, shell: Shell) -> String {
@@ -137,16 +137,16 @@ mod tests {
     #[test]
     fn renders_sets_and_unsets_per_shell() {
         let ops = vec![
-            EnvOp::set("VJENV_IDENTITY", "goxore"),
+            EnvOp::set("VJENV_IDENTITY", "castro"),
             EnvOp::unset("VJENV_PINNED"),
         ];
         assert_eq!(
             render(&ops, Shell::Fish),
-            "set -gx VJENV_IDENTITY 'goxore'\nset -e VJENV_PINNED\n"
+            "set -gx VJENV_IDENTITY 'castro'\nset -e VJENV_PINNED\n"
         );
         assert_eq!(
             render(&ops, Shell::Posix),
-            "export VJENV_IDENTITY='goxore'\nunset VJENV_PINNED\n"
+            "export VJENV_IDENTITY='castro'\nunset VJENV_PINNED\n"
         );
     }
 

@@ -42,7 +42,7 @@ PanelWindow {
 
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.topMargin: Style.barPadding
+        anchors.topMargin: Style.barOnTop ? Style.barWidth + Style.barPadding : Style.barPadding
         anchors.rightMargin: Style.barPadding
 
         width: Style.panelWidth

@@ -15,18 +15,20 @@ PanelWindow {
 
     anchors {
         top: true
-        bottom: true
-        left: Style.barOnLeft
-        right: !Style.barOnLeft
+        bottom: !Style.barOnTop
+        left: Style.barOnTop ? true : Style.barOnLeft
+        right: Style.barOnTop ? true : !Style.barOnLeft
     }
     exclusiveZone: Style.barExclusive ? Style.barWidth : 0
 
     implicitWidth: Style.barWidth
+    implicitHeight: Style.barWidth
     color: Theme.surface
 
     WlrLayershell.namespace: "vjshell-bar"
 
     Rectangle {
+        visible: !Style.barOnTop
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.left: Style.barOnLeft ? undefined : parent.left
@@ -35,13 +37,25 @@ PanelWindow {
         color: Theme.surfaceVariant
     }
 
+    Rectangle {
+        visible: Style.barOnTop
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        height: Style.dividerWidth
+        color: Theme.surfaceVariant
+    }
+
     ColumnLayout {
+        visible: !Style.barOnTop
         anchors.fill: parent
         anchors.topMargin: Style.barPadding
         anchors.bottomMargin: Style.barPadding
         spacing: Style.groupSpacing
 
-        Logo {}
+        Logo {
+            Layout.alignment: Qt.AlignHCenter
+        }
 
         Projects {
             Layout.alignment: Qt.AlignHCenter
@@ -103,6 +117,68 @@ PanelWindow {
                 SysTray {
                     Layout.alignment: Qt.AlignHCenter
                 }
+            }
+        }
+    }
+
+    RowLayout {
+        visible: Style.barOnTop
+        anchors.fill: parent
+        anchors.leftMargin: Style.barPadding
+        anchors.rightMargin: Style.barPadding
+        spacing: Style.groupSpacing
+
+        Logo {
+            Layout.alignment: Qt.AlignVCenter
+        }
+
+        Projects {
+            Layout.alignment: Qt.AlignVCenter
+            Layout.fillWidth: false
+        }
+
+        Workspaces {
+            id: topWorkspaces
+
+            Layout.alignment: Qt.AlignVCenter
+            Layout.fillWidth: false
+            screenName: root.screenName
+        }
+
+        Item {
+            Layout.fillWidth: true
+        }
+
+        RowLayout {
+            spacing: Style.spacing * 2
+
+            NotificationBell {
+                Layout.alignment: Qt.AlignVCenter
+            }
+
+            Volume {
+                Layout.alignment: Qt.AlignVCenter
+            }
+
+            Mic {
+                Layout.alignment: Qt.AlignVCenter
+            }
+
+            LyricsButton {
+                Layout.alignment: Qt.AlignVCenter
+            }
+
+            KeyboardLayout {
+                Layout.alignment: Qt.AlignVCenter
+                screenName: root.screenName
+            }
+
+            Clock {
+                Layout.alignment: Qt.AlignVCenter
+            }
+
+            SysTray {
+                Layout.alignment: Qt.AlignVCenter
             }
         }
     }

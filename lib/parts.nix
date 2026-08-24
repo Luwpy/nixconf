@@ -13,6 +13,12 @@
     description = "Helpers shared between modules in this flake";
   };
 
+  options.flake.diskoConfigurations = lib.mkOption {
+    type = lib.types.lazyAttrsOf lib.types.raw;
+    default = {};
+    description = "Disko layouts, one child per host";
+  };
+
   config = {
     perSystem = {system, ...}: {
       _module.args.pkgs = import inputs.nixpkgs {

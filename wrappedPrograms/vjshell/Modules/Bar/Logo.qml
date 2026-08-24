@@ -5,7 +5,6 @@ import qs.Commons
 Text {
     id: root
 
-    Layout.alignment: Qt.AlignHCenter
     Layout.preferredHeight: Style.logoSize
 
     text: String.fromCodePoint(0xF1105)

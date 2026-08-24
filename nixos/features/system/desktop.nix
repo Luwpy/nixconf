@@ -69,7 +69,7 @@
       emoji = ["Noto Color Emoji"];
     };
 
-    time.timeZone = "Europe/Kyiv";
+    services.automatic-timezoned.enable = true;
     i18n.defaultLocale = "en_US.UTF-8";
     i18n.extraLocaleSettings = {
       LC_ADDRESS = "uk_UA.UTF-8";

@@ -1,7 +1,7 @@
 {self, ...}: {
   perSystem = {pkgs, ...}: {
     packages.cursors = pkgs.stdenvNoCC.mkDerivation {
-      pname = "bibata-gruvbox-cursors";
+      pname = "bibata-solitude-cursors";
       inherit (pkgs.bibata-cursors) version src bitmaps;
 
       nativeBuildInputs = [
@@ -22,7 +22,7 @@
           -p x11 \
           -d bitmaps \
           -n '${self.cursor.name}' \
-          -c 'Bibata cursors recolored to the gruvbox foreground'
+          -c 'Bibata cursors recolored to the theme foreground'
 
         runHook postBuild
       '';

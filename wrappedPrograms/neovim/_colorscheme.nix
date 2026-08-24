@@ -1,8 +1,25 @@
-{
-  theme,
-  darken,
-}: let
+{darken}: let
   inherit (builtins) concatStringsSep;
+
+  # Ashen — https://github.com/ficd0/ashen.nvim
+  theme = {
+    base00 = "#121212"; # bg
+    base01 = "#191919"; # darkest surface
+    base02 = "#323232"; # surface / borders
+    base03 = "#535353"; # muted / comments
+    base04 = "#737373"; # gray
+    base05 = "#949494"; # mid fg
+    base06 = "#b4b4b4"; # fg
+    base07 = "#e5e5e5"; # light fg
+    base08 = "#DF6464"; # red glow accent
+    base09 = "#D87C4A"; # orange glow
+    base0A = "#E5A72A"; # golden
+    base0B = "#629C7D"; # light green
+    base0C = "#3A6E6E"; # dark teal
+    base0D = "#4A8B8B"; # muted teal blue
+    base0E = "#D1728C"; # rose pink
+    base0F = "#C4693D"; # blaze orange
+  };
 
   palette =
     theme

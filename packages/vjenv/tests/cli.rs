@@ -7,14 +7,14 @@ standalone = ["~/nixconf"]
 containers = ["~/Projects"]
 markers = [".vjenv-root"]
 
-[identities.goxore]
-name = "Yurii"
-email = "yurii@goxore.com"
+[identities.castro]
+name = "Castro"
+email = "jpcastro.sp@gmail.com"
 ssh_key = "~/.ssh/primary"
 
-[identities.vimjoyer]
-name = "Vimjoyer"
-email = "vimjoyer@gmail.com"
+[identities.luwpy]
+name = "Luwpy"
+email = "nerdboom09@gmail.com"
 "#;
 
 struct Sandbox {
@@ -120,23 +120,23 @@ fn an_unassigned_project_emits_a_complete_set_of_unsets() {
 fn an_assigned_project_emits_the_full_identity() {
     let s = Sandbox::new();
     let p = s.project();
-    s.ok(&p, &["assign", "--identity", "goxore"]);
+    s.ok(&p, &["assign", "--identity", "castro"]);
 
     let out = s.ok(&p, &["env", "posix"]);
     let expected = format!(
-        "export VJENV_IDENTITY='goxore'\n\
+        "export VJENV_IDENTITY='castro'\n\
          export VJENV_ROOT='{root}'\n\
          unset VJENV_PINNED\n\
          export GIT_CONFIG_COUNT='3'\n\
          export GIT_CONFIG_KEY_0='user.name'\n\
-         export GIT_CONFIG_VALUE_0='Yurii'\n\
+         export GIT_CONFIG_VALUE_0='Castro'\n\
          export GIT_CONFIG_KEY_1='user.email'\n\
-         export GIT_CONFIG_VALUE_1='yurii@goxore.com'\n\
+         export GIT_CONFIG_VALUE_1='jpcastro.sp@gmail.com'\n\
          export GIT_CONFIG_KEY_2='core.sshCommand'\n\
          export GIT_CONFIG_VALUE_2='ssh -i {home}/.ssh/primary -o IdentitiesOnly=yes'\n\
          export GIT_SSH_COMMAND='ssh -i {home}/.ssh/primary -o IdentitiesOnly=yes'\n\
-         export GH_CONFIG_DIR='{home}/.local/share/vjenv/goxore/gh'\n\
-         export JJ_CONFIG='{home}/.run/vjenv/goxore.jj.toml'\n",
+         export GH_CONFIG_DIR='{home}/.local/share/vjenv/castro/gh'\n\
+         export JJ_CONFIG='{home}/.run/vjenv/castro.jj.toml'\n",
         root = p.display(),
         home = s.home.display(),
     );
@@ -147,20 +147,20 @@ fn an_assigned_project_emits_the_full_identity() {
 #[test]
 fn the_jj_fragment_is_written_when_the_identity_is_emitted() {
     let s = Sandbox::new();
-    s.ok(&s.project(), &["assign", "--identity", "goxore"]);
+    s.ok(&s.project(), &["assign", "--identity", "castro"]);
     s.ok(&s.project(), &["env", "posix"]);
 
-    let fragment = s.home.join(".run/vjenv/goxore.jj.toml");
+    let fragment = s.home.join(".run/vjenv/castro.jj.toml");
     let text = std::fs::read_to_string(&fragment).expect("fragment should exist");
     let parsed: toml::Value = toml::from_str(&text).unwrap();
-    assert_eq!(parsed["user"]["email"].as_str(), Some("yurii@goxore.com"));
+    assert_eq!(parsed["user"]["email"].as_str(), Some("jpcastro.sp@gmail.com"));
 }
 
 #[test]
 fn switching_to_a_keyless_identity_clears_the_key() {
     let s = Sandbox::new();
     let p = s.project();
-    s.ok(&p, &["assign", "--identity", "vimjoyer"]);
+    s.ok(&p, &["assign", "--identity", "luwpy"]);
     let out = s.ok(&p, &["env", "posix"]);
     assert!(out.contains("export GIT_CONFIG_COUNT='2'\n"), "{out}");
     assert!(out.contains("unset GIT_SSH_COMMAND\n"), "{out}");
@@ -170,9 +170,9 @@ fn switching_to_a_keyless_identity_clears_the_key() {
 #[test]
 fn fish_output_is_valid_fish() {
     let s = Sandbox::new();
-    s.ok(&s.project(), &["assign", "--identity", "goxore"]);
+    s.ok(&s.project(), &["assign", "--identity", "castro"]);
     let out = s.ok(&s.project(), &["env", "fish"]);
-    assert!(out.contains("set -gx VJENV_IDENTITY 'goxore'\n"), "{out}");
+    assert!(out.contains("set -gx VJENV_IDENTITY 'castro'\n"), "{out}");
     assert!(out.contains("set -e VJENV_PINNED\n"), "{out}");
     assert_parses(&out, "fish", "-n");
 }
@@ -190,7 +190,7 @@ fn a_dev_environment_is_offered_once_and_remembered_when_denied() {
     let s = Sandbox::new();
     let p = s.project();
     std::fs::write(p.join("flake.nix"), "{}").unwrap();
-    s.ok(&p, &["assign", "--identity", "goxore"]);
+    s.ok(&p, &["assign", "--identity", "castro"]);
 
     let offered = s.ok(&p, &["env", "fish"]);
     assert!(
@@ -216,8 +216,8 @@ fn no_devshell_suppresses_the_dev_environment_section() {
 fn use_emits_an_override_and_clear_removes_it() {
     let s = Sandbox::new();
     assert_eq!(
-        s.ok(&s.project(), &["use", "goxore", "--shell", "fish"]),
-        "set -gx VJENV_OVERRIDE 'goxore'\n"
+        s.ok(&s.project(), &["use", "castro", "--shell", "fish"]),
+        "set -gx VJENV_OVERRIDE 'castro'\n"
     );
     assert_eq!(
         s.ok(&s.project(), &["use", "--clear", "--shell", "posix"]),
@@ -242,12 +242,12 @@ fn assign_rejects_unknown_identities() {
 fn assign_records_the_identity() {
     let s = Sandbox::new();
     let p = s.project();
-    s.ok(&p, &["assign", "--identity", "goxore"]);
+    s.ok(&p, &["assign", "--identity", "castro"]);
 
     let text = std::fs::read_to_string(s.home.join(".local/state/vjenv/projects.toml")).unwrap();
     let reg: toml::Value = toml::from_str(&text).unwrap();
     let entry = &reg[p.to_string_lossy().as_ref()];
-    assert_eq!(entry["identity"].as_str(), Some("goxore"));
+    assert_eq!(entry["identity"].as_str(), Some("castro"));
 }
 
 #[test]
@@ -273,8 +273,8 @@ fn gc_drops_entries_for_directories_that_are_gone() {
     let s = Sandbox::new();
     let doomed = s.home.join("Projects/temporary");
     std::fs::create_dir_all(&doomed).unwrap();
-    s.ok(&doomed, &["assign", "--identity", "goxore"]);
-    s.ok(&s.project(), &["assign", "--identity", "vimjoyer"]);
+    s.ok(&doomed, &["assign", "--identity", "castro"]);
+    s.ok(&s.project(), &["assign", "--identity", "luwpy"]);
     std::fs::remove_dir_all(&doomed).unwrap();
 
     let dry = s.ok(&s.home, &["gc", "--dry-run"]);
@@ -293,9 +293,9 @@ fn gc_drops_entries_for_directories_that_are_gone() {
 fn exec_runs_a_command_with_the_identity_applied() {
     let s = Sandbox::new();
     let p = s.project();
-    s.ok(&p, &["assign", "--identity", "goxore"]);
+    s.ok(&p, &["assign", "--identity", "castro"]);
     let out = s.ok(&p, &["exec", "sh", "-c", "printf %s \"$VJENV_IDENTITY\""]);
-    assert_eq!(out, "goxore");
+    assert_eq!(out, "castro");
 }
 
 #[test]

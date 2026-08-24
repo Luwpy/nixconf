@@ -77,11 +77,11 @@ in {
           --active-2: ${theme.base03};
           --message-hover: var(--hover);
 
-          --accent-1: var(--green-1);
-          --accent-2: var(--green-2);
-          --accent-3: var(--green-3);
-          --accent-4: var(--green-4);
-          --accent-5: var(--green-5);
+          --accent-1: var(--blue-1);
+          --accent-2: var(--blue-2);
+          --accent-3: var(--blue-3);
+          --accent-4: var(--blue-4);
+          --accent-5: var(--blue-5);
           --accent-new: var(--red-2);
           --mention: linear-gradient(to right, color-mix(in hsl, var(--accent-2), transparent 90%) 40%, transparent);
           --mention-hover: linear-gradient(to right, color-mix(in hsl, var(--accent-2), transparent 95%) 40%, transparent);

@@ -171,7 +171,7 @@
         repeat_rate = 40;
         repeat_delay = 250;
         numlockon = 0;
-        xkb_rules_layout = "us,ru,ua";
+        xkb_rules_layout = "br";
         xkb_rules_options = "grp:alt_shift_toggle";
 
         disable_trackpad = 0;
@@ -285,6 +285,8 @@
             "${mod}+CTRL,S,spawn,${lib.getExe self.packages.${pkgs.stdenv.hostPlatform.system}.screenshot}"
             "${mod}+SHIFT,S,spawn,${lib.getExe self.packages.${pkgs.stdenv.hostPlatform.system}.screenshotFull}"
             "${mod}+SHIFT,E,spawn,${lib.getExe self.packages.${pkgs.stdenv.hostPlatform.system}.pipeSwappy}"
+
+            "${mod}+SHIFT,r,reload_config"
 
             "${mod},V,spawn,${config.pkgs.alsa-utils}/bin/amixer sset Capture toggle"
 

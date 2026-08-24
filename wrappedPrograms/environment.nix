@@ -41,12 +41,15 @@
       pkgs.lazygit
       pkgs.just
       pkgs.mprocs
+      pkgs.tmux
       pkgs.devenv
       {
         data = pkgs.secretspec;
         prefix = true;
       }
       pkgs.bitwarden-cli
+      pkgs.opencode
+
       selfpkgs.nh
       selfpkgs.neovimDynamic
       selfpkgs.qalc

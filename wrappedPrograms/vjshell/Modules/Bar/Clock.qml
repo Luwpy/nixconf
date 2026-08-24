@@ -9,9 +9,10 @@ Item {
     id: root
 
     readonly property bool open: PanelService.isOpen("calendar")
+    readonly property bool horizontal: Style.barOnTop
 
-    implicitWidth: column.implicitWidth + Style.spacing * 2
-    implicitHeight: column.implicitHeight + Style.spacing * 2
+    implicitWidth: (root.horizontal ? rowLay.implicitWidth : column.implicitWidth) + Style.spacing * 2
+    implicitHeight: (root.horizontal ? rowLay.implicitHeight : column.implicitHeight) + Style.spacing * 2
 
     SystemClock {
         id: clock
@@ -27,6 +28,7 @@ Item {
 
     ColumnLayout {
         id: column
+        visible: !root.horizontal
         anchors.centerIn: parent
         spacing: 0
 
@@ -58,6 +60,33 @@ Item {
         Line {
             text: Qt.formatDateTime(clock.date, "MM")
             color: Theme.textDim
+        }
+    }
+
+    RowLayout {
+        id: rowLay
+        visible: root.horizontal
+        anchors.centerIn: parent
+        spacing: Style.spacing
+
+        scale: tap.pressed ? Style.pressScale : 1.0
+
+        Behavior on scale {
+            NumberAnimation {
+                duration: Style.durShort2
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Style.standard
+            }
+        }
+
+        Line {
+            text: Qt.formatDateTime(clock.date, "HH:mm")
+            font.pixelSize: Style.fontSizeLarge
+            color: root.open ? Theme.accent : Theme.textBright
+        }
+        Line {
+            text: Qt.formatDateTime(clock.date, "dd/MM")
+            color: root.open ? Theme.accent : Theme.textDim
         }
     }
 

@@ -107,7 +107,7 @@ PanelWindow {
         id: panel
 
         anchors.horizontalCenter: parent.horizontalCenter
-        y: Math.round(parent.height / 5)
+        y: Math.max(Style.barWidth + Style.barPadding, Math.round(parent.height / 5))
 
         width: Style.launcherWidth
         height: column.implicitHeight + Style.panelPadding * 2

@@ -419,7 +419,7 @@ mod tests {
             ("PATH", "/nix/store/a/bin:/nix/store/b/bin"),
             ("CARGO_HOME", "/x/cargo"),
             ("SHLVL", "3"),
-            ("HOME", "/home/yurii"),
+            ("HOME", "/home/luwpy"),
             ("shellHook", "echo hi"),
             ("JJ_CONFIG", "/should/not/leak"),
         ]));
@@ -437,7 +437,7 @@ mod tests {
     #[test]
     fn vjenv_and_git_variables_are_never_captured() {
         let raw = parse_dump(&dump(&[
-            ("VJENV_IDENTITY", "goxore"),
+            ("VJENV_IDENTITY", "castro"),
             ("VJENV_ROOT", "/h/x"),
             ("GIT_CONFIG_COUNT", "3"),
             ("GIT_SSH_COMMAND", "ssh -i /k"),

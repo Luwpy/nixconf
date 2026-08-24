@@ -3,8 +3,9 @@ pragma Singleton
 import Quickshell
 
 Singleton {
-    readonly property string barEdge: "left"
+    readonly property string barEdge: "top"
     readonly property bool barOnLeft: barEdge === "left"
+    readonly property bool barOnTop: barEdge === "top"
     readonly property bool barExclusive: true
 
     readonly property int barWidth: 40

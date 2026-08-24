@@ -61,7 +61,7 @@
       relPath = "share/${appName}/themes/${themeFile}";
       content = ''
         /**
-         * @name system24 (gruvbox)
+         * @name system24 (solitude)
          * @description a tui-style discord theme.
          * @author refact0r
          * @version 2.0.0

@@ -55,6 +55,17 @@
           pkgs.vimPlugins.luasnip
 
           pkgs.vimPlugins.codediff-nvim
+
+          (pkgs.vimUtils.buildVimPlugin {
+            pname = "ashen.nvim";
+            version = "2025-07-13";
+            src = pkgs.fetchFromGitHub {
+              owner = "ficd0";
+              repo = "ashen.nvim";
+              rev = "bfb04bd50b69d863469b2deb9fb361cf0d945ba7";
+              hash = "sha256-yC9V58zieE8YvEuAnJhEOgONrudUJgQFqC59cKo97/g=";
+            };
+          })
         ];
       };
 
@@ -109,7 +120,7 @@
     checks.neovim-colorscheme = self.lib.mkGeneratedFileCheck {
       inherit pkgs;
       name = "neovim-colorscheme";
-      generated = import ./_colorscheme.nix {inherit (self) theme darken;};
+      generated = import ./_colorscheme.nix {inherit (self) darken;};
       committed = ./lua/colorscheme.lua;
       path = "wrappedPrograms/neovim/lua/colorscheme.lua";
     };

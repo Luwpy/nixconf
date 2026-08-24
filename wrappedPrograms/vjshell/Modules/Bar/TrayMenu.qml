@@ -58,8 +58,8 @@ PanelWindow {
     Surface {
         id: box
 
-        x: Style.barOnLeft ? Style.barPadding : parent.width - width - Style.barPadding
-        y: Math.max(Style.barPadding, Math.min(TrayMenuService.anchorY - height / 2, parent.height - height - Style.barPadding))
+        x: Style.barOnTop ? Math.max(Style.barPadding, Math.min(TrayMenuService.anchorX - width / 2, parent.width - width - Style.barPadding)) : Style.barOnLeft ? Style.barPadding : parent.width - width - Style.barPadding
+        y: Style.barOnTop ? Style.barWidth + Style.spacing : Math.max(Style.barPadding, Math.min(TrayMenuService.anchorY - height / 2, parent.height - height - Style.barPadding))
 
         width: Style.menuWidth
         implicitHeight: column.implicitHeight + Style.spacing * 2
@@ -71,8 +71,8 @@ PanelWindow {
         opacity: reveal.progress
 
         transform: Scale {
-            origin.x: Style.barOnLeft ? 0 : box.width
-            origin.y: Math.max(0, Math.min(box.height, TrayMenuService.anchorY - box.y))
+            origin.x: Style.barOnTop ? Math.max(0, Math.min(box.width, TrayMenuService.anchorX - box.x)) : Style.barOnLeft ? 0 : box.width
+            origin.y: Style.barOnTop ? 0 : Math.max(0, Math.min(box.height, TrayMenuService.anchorY - box.y))
             xScale: 0.85 + 0.15 * reveal.progress
             yScale: 0.85 + 0.15 * reveal.progress
         }

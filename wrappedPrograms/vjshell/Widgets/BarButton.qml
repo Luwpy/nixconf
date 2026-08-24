@@ -25,7 +25,7 @@ Item {
         interval: Style.tooltipDelay
         onTriggered: {
             const pos = root.mapToItem(null, 0, 0);
-            TooltipService.show(root.tooltip, pos.y + root.height / 2, QsWindow.window?.screen?.name ?? "");
+            TooltipService.show(root.tooltip, pos.y + root.height / 2, QsWindow.window?.screen?.name ?? "", pos.x + root.width / 2);
         }
     }
 

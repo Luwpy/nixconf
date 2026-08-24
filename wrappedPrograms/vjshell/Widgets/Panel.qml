@@ -65,8 +65,8 @@ PanelWindow {
     Surface {
         id: box
 
-        y: parent.height - height - Style.barPadding
-        x: Style.barOnLeft ? Style.barPadding : parent.width - width - Style.barPadding
+        y: Style.barOnTop ? Style.barWidth + Style.barPadding : parent.height - height - Style.barPadding
+        x: Style.barOnTop ? parent.width - width - Style.barPadding : Style.barOnLeft ? Style.barPadding : parent.width - width - Style.barPadding
 
         width: root.panelWidth
         height: Math.min(column.implicitHeight + Style.panelPadding * 2, root.maxPanelHeight, parent.height - Style.barPadding * 2)
@@ -76,10 +76,11 @@ PanelWindow {
 
         opacity: reveal.progress
         scale: 0.96 + 0.04 * reveal.progress
-        transformOrigin: Style.barOnLeft ? Item.BottomLeft : Item.BottomRight
+        transformOrigin: Style.barOnTop ? Item.TopRight : Style.barOnLeft ? Item.BottomLeft : Item.BottomRight
 
         transform: Translate {
-            x: (Style.barOnLeft ? -1 : 1) * 16 * (1 - reveal.progress)
+            x: Style.barOnTop ? 0 : (Style.barOnLeft ? -1 : 1) * 16 * (1 - reveal.progress)
+            y: Style.barOnTop ? -16 * (1 - reveal.progress) : 0
         }
 
         Behavior on height {
