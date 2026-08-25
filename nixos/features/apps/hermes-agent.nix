@@ -9,9 +9,12 @@
     ...
   }: {
     imports = [inputs.hermes-agent.nixosModules.default];
-    
+
     persistance.data.directories = [
-        ".hermes"
+      ".hermes"
+    ];
+    persistance.cache.directories = [
+      ".cache/hermes"
     ];
 
     security.sudo.extraRules = [
@@ -25,17 +28,30 @@
         ];
       }
     ];
+    environment.systemPackages = with pkgs; [
+      inputs.cua.packages.${pkgs.stdenv.hostPlatform.system}.cua-driver
+    ];
+
+    services.gnome.at-spi2-core.enable = true;
+    programs.dconf.profiles.user.databases = [
+      {
+        settings."org/gnome/desktop/interface".toolkit-accessibility = true;
+      }
+    ];
 
     services.hermes-agent = {
       enable = true;
-      container.enable = true;
-      container.backend = "podman";
-      container.image = "docker.io/library/debian:bookworm-slim";
-      container.hostUsers = [config.preferences.user.name];
+      # container.enable = true;
+      # container.backend = "podman";
+      # container.image = "docker.io/library/debian:bookworm-slim";
+      # container.hostUsers = [config.preferences.user.name];
 
       environmentFiles = ["/persist/nvidia-key" "/persist/hermes-discord"];
+      environment = {
+        CUA_DRIVER_RS_ENABLE_WAYLAND = "1";
+      };
       addToSystemPackages = true;
-      extraDependencyGroups = ["messaging"];
+      extraDependencyGroups = ["messaging" "exa"];
       extraArgs = ["--verbose"];
       restart = "always";
       restartSec = 5;
@@ -43,11 +59,11 @@
       settings = {
         model = {
           provider = "nvidia";
-          default = "nvidia/nemotron-3.1-nano-30b-v1";
+          default = "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning";
         };
 
         providers.nvidia = {
-        api = "https://integrate.api.nvidia.com/v1";
+          api = "https://integrate.api.nvidia.com/v1";
           key_env = "NVIDIA_API_KEY";
           transport = "chat_completions";
         };

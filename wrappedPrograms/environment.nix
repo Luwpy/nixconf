@@ -10,6 +10,8 @@
     packageOf = entry: entry.data or entry;
 
     runtimeTools = [
+      pkgs.obsidian
+
       pkgs.nil
       pkgs.nixd
       pkgs.statix
