@@ -74,11 +74,12 @@
       env = {
         XCURSOR_THEME = self.cursor.name;
         XCURSOR_SIZE = toString self.cursor.size;
+        XDG_SESSION_TYPE = "wayland";
       };
 
       autostart_sh = ''
-        ${pkgs.systemd}/bin/systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-        ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+        ${pkgs.systemd}/bin/systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+        ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
         ${pkgs.systemd}/bin/systemctl --user start nixos-fake-graphical-session.target
 
         ${vjshellExe} &
