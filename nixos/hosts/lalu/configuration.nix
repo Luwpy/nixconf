@@ -98,6 +98,8 @@
       stremio-linux-shell
 
       whatsapp-electron
+
+      obsidian
     ];
 
     xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
