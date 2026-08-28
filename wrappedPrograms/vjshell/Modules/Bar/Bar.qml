@@ -172,7 +172,9 @@ PanelWindow {
                 Layout.alignment: Qt.AlignVCenter
                 screenName: root.screenName
             }
-
+            Battery {
+                Layout.alignment: Qt.AlignVCenter
+            }
             Clock {
                 Layout.alignment: Qt.AlignVCenter
             }

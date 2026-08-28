@@ -8,6 +8,17 @@
     lib,
     ...
   }: let
+    # upstream nixpkgs pythonMetadataCheckPhase (gh#532778) fails for
+    # steamworkspy because its .dist-info name doesn't match the `steamworkspy`
+    # pname; disable the check until upstream fixes it.
+    fixSteamworkspy = final: prev: {
+      python314Packages = prev.python314Packages // {
+        steamworkspy = prev.python314Packages.steamworkspy.overrideAttrs (_: {
+          dontCheckPythonMetadata = true;
+        });
+      };
+    };
+
     inherit (self) theme darken;
 
     adwaitaForSteam = pkgs.fetchFromGitHub {
@@ -109,6 +120,8 @@
       fi
     '';
   in {
+    nixpkgs.overlays = [fixSteamworkspy];
+
     hardware.graphics.enable = lib.mkDefault true;
 
     programs = {
@@ -134,7 +147,7 @@
     environment.systemPackages = with pkgs; [
       steam-run
       dxvk
-      # parsec-bin
+      parsec-bin
 
       gamescope
 
@@ -154,6 +167,8 @@
       lsfg-vk
       lsfg-vk-ui
       self.packages.${pkgs.stdenv.hostPlatform.system}.wow-launcher
+
+      rimsort
     ];
 
     services.zerotierone.enable = true;

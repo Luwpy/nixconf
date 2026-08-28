@@ -8,6 +8,7 @@ import qs.Modules.MicOverlay
 import qs.Modules.Network
 import qs.Modules.Notifications
 import qs.Modules.Osd
+import qs.Modules.Power
 import qs.Modules.Processes
 
 ShellRoot {
@@ -54,6 +55,11 @@ ShellRoot {
     Variants {
         model: Quickshell.screens
         delegate: ProcessPanel {}
+    }
+
+    Variants {
+        model: Quickshell.screens
+        delegate: PowerPanel {}
     }
 
     Variants {

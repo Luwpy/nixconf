@@ -40,6 +40,16 @@ Singleton {
     readonly property string chevronRight: "chevron_right"
 
     readonly property string power: "power_settings_new"
+    readonly property string batteryFull: "battery_full"
+    readonly property string battery5Bar: "battery_5_bar"
+    readonly property string battery4Bar: "battery_4_bar"
+    readonly property string battery3Bar: "battery_3_bar"
+    readonly property string battery2Bar: "battery_2_bar"
+    readonly property string battery1Bar: "battery_1_bar"
+    readonly property string battery0Bar: "battery_0_bar"
+    readonly property string batteryCharging: "battery_charging_full"
+    readonly property string batteryAlert: "battery_alert"
+    readonly property string batteryUnknown: "battery_unknown"
     readonly property string search: "search"
     readonly property string terminal: "terminal"
     readonly property string remove: "delete"
@@ -76,6 +86,22 @@ Singleton {
     readonly property string resize: "open_in_full"
     readonly property string rotate: "sync"
     readonly property string dragIndicator: "drag_indicator"
+
+    function forBattery(percentage) {
+        if (percentage >= 95)
+            return batteryFull;
+        if (percentage >= 80)
+            return battery5Bar;
+        if (percentage >= 60)
+            return battery4Bar;
+        if (percentage >= 40)
+            return battery3Bar;
+        if (percentage >= 20)
+            return battery2Bar;
+        if (percentage >= 5)
+            return battery1Bar;
+        return battery0Bar;
+    }
 
     function forBluetoothDevice(iconName) {
         const name = iconName || "";

@@ -8,9 +8,10 @@ Item {
     property real value: 0
     property string label: ""
     property string sub: ""
+    property bool invertColor: false
 
     readonly property real clamped: Math.max(0, Math.min(1, value))
-    readonly property color fillColor: clamped >= 0.90 ? Theme.urgent : clamped >= 0.75 ? Theme.warning : Theme.accent
+    readonly property color fillColor: !invertColor ? (clamped >= 0.90 ? Theme.urgent : clamped >= 0.75 ? Theme.warning : Theme.accent) : (clamped <= 0.20 ? Theme.urgent : clamped <= 0.35 ? Theme.warning : Theme.accent)
 
     property real animated: clamped
 
