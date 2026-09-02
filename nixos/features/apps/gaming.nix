@@ -12,11 +12,13 @@
     # steamworkspy because its .dist-info name doesn't match the `steamworkspy`
     # pname; disable the check until upstream fixes it.
     fixSteamworkspy = final: prev: {
-      python314Packages = prev.python314Packages // {
-        steamworkspy = prev.python314Packages.steamworkspy.overrideAttrs (_: {
-          dontCheckPythonMetadata = true;
-        });
-      };
+      python314Packages =
+        prev.python314Packages
+        // {
+          steamworkspy = prev.python314Packages.steamworkspy.overrideAttrs (_: {
+            dontCheckPythonMetadata = true;
+          });
+        };
     };
 
     inherit (self) theme darken;

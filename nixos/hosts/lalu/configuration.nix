@@ -30,6 +30,7 @@
       self.nixosModules.godot
       self.nixosModules.telegram
       self.nixosModules.youtube-music
+      self.nixosModules.spotify
 
       self.nixosModules.gaming
       self.nixosModules.powersave
