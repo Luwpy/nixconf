@@ -55,6 +55,7 @@
           pkgs.vimPlugins.luasnip
 
           pkgs.vimPlugins.codediff-nvim
+          pkgs.vimPlugins.git-dev-nvim
 
           (pkgs.vimUtils.buildVimPlugin {
             pname = "ashen.nvim";
