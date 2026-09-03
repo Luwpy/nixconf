@@ -9,7 +9,7 @@
 
       self.nixosModules.pipewire
       self.nixosModules.firefox
-      self.nixosModules.chromium
+      # self.nixosModules.chromium
     ];
 
     console.colors = with themeNoHash; [

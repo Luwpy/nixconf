@@ -170,6 +170,7 @@
       lsfg-vk-ui
       self.packages.${pkgs.stdenv.hostPlatform.system}.wow-launcher
 
+      hydralauncher
       rimsort
     ];
 

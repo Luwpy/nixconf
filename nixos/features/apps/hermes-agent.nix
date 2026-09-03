@@ -28,7 +28,7 @@
         ];
       }
     ];
-    environment.systemPackages = with pkgs; [
+    environment.systemPackages = [
       inputs.cua.packages.${pkgs.stdenv.hostPlatform.system}.cua-driver
     ];
 
@@ -41,6 +41,15 @@
 
     services.hermes-agent = {
       enable = true;
+      createUser = true;
+      extraPackages = with pkgs; [
+        python3
+        pandoc
+      ];
+      extraPythonPackages = [
+        pkgs.python3Packages.youtube-transcript-api
+        pkgs.python3Packages.uv
+      ];
       # container.enable = true;
       # container.backend = "podman";
       # container.image = "docker.io/library/debian:bookworm-slim";
@@ -67,6 +76,8 @@
           key_env = "NVIDIA_API_KEY";
           transport = "chat_completions";
         };
+
+        gateway.enable = true;
 
         toolsets = ["all"];
         max_turns = 100;
