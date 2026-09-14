@@ -30,9 +30,6 @@
     hermes-agent.url = "github:NousResearch/hermes-agent";
     cua.url = "github:trycua/cua";
     nixpkgs-multiverse.url = "github:fzakaria/nixpkgs-multiverse";
-
-    # Source for packages/alethe.nix — kept in lockstep with the
-    # packages/alethe-agents submodule (bump both together).
   };
 
   # Import all .nix files from current directory except flake.nix recursively

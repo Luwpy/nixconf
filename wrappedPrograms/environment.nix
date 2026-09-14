@@ -10,8 +10,6 @@
     packageOf = entry: entry.data or entry;
 
     runtimeTools = [
-      pkgs.obsidian
-
       pkgs.nil
       pkgs.nixd
       pkgs.statix
@@ -68,6 +66,8 @@
       selfpkgs.claude-per
       selfpkgs.claude-fish
       selfpkgs.codex
+      selfpkgs.fastfetch
+      selfpkgs.leaf
     ];
   in {
     imports = [self.wrapperModules.fish];
