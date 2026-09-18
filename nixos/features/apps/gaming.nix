@@ -172,6 +172,8 @@
 
       hydralauncher
       rimsort
+
+      retroarch-full
     ];
 
     services.zerotierone.enable = true;
