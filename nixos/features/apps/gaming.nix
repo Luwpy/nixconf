@@ -181,7 +181,7 @@
     persistance.cache.directories = [
       ".local/share/Hytale"
       ".local/share/hytale-launcher"
-
+      ".config/retroarch"
       ".local/share/Steam"
       ".local/share/bottles"
       ".local/share/PrismLauncher"

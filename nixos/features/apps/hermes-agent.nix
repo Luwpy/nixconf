@@ -1,5 +1,8 @@
-{ self, inputs, ... }:
 {
+  self,
+  inputs,
+  ...
+}: {
   flake.nixosModules.hermes-agent = {
     pkgs,
     config,
@@ -21,11 +24,11 @@
     # O Hermes detecta automaticamente que precisa de sudo.
     security.sudo.extraRules = [
       {
-        users = [ config.preferences.user.name ];
+        users = [config.preferences.user.name];
         commands = [
           {
             command = "/run/current-system/sw/bin/podman";
-            options = [ "NOPASSWD" ];
+            options = ["NOPASSWD"];
           }
         ];
       }
@@ -76,12 +79,13 @@
         # HOST                              CONTAINER
         # ~/Documents  ------------------>  /home/hermes/Documents
         extraVolumes = [
-          "/home/${config.preferences.user.name}/Documents:/home/hermes/Documents:rw"
+          "/home/${config.preferences.user.name}/Projects:/home/hermes/Projects:rw"
+"/home/${config.preferences.user.name}/Documents:/home/hermes/Documents:rw"
         ];
       };
 
       # O Hermes começa nesse diretório.
-      workingDirectory = "/home/hermes/Documents";
+      workingDirectory = "/home/hermes/";
 
       environmentFiles = [
         "/persist/nvidia-key"
