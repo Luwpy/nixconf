@@ -1,0 +1,36 @@
+local COLORSCHEME = {
+    base00 = "#101315",
+    base01 = "#1e1e1e",
+    base02 = "#2f353b",
+    base03 = "#4b4e55",
+    base04 = "#707070",
+    base05 = "#9fa5a9",
+    base06 = "#cacccc",
+    base07 = "#d9dbdc",
+    base08 = "#de6145",
+    base09 = "#c9c2b4",
+    base0A = "#cbc2be",
+    base0B = "#9fa5a9",
+    base0C = "#a8adb0",
+    base0D = "#798186",
+    base0E = "#aeaeae",
+    base0F = "#565d60",
+
+    green = "#9fa5a9",
+    cyan = "#a8adb0",
+    blue2 = "#5a6064",
+
+    bg = "#101315",
+    fg = "#cacccc",
+    orange = "#c9c2b4",
+    red = "#de6145",
+    blue = "#798186",
+    yellow = "#cbc2be",
+    magenta = "#aeaeae",
+    gray = "#1e1e1e",
+    lightgray = "#2f353b",
+    darkgray = "#0d1011",
+    inactivegray = "#0b0d0e",
+}
+
+return COLORSCHEME

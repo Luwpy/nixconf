@@ -1,0 +1,100 @@
+{
+  "adwaita-for-steam": {
+    "type": "github",
+    "owner": "tkashkin",
+    "repo": "Adwaita-for-Steam",
+    "rev": "1e92107a51f6ed53c59c38646444c9eb3a52b030",
+    "narHash": "sha256-wH0z2LZ94j5ErRI40f9IRBJXJ6yuL+NLgjmj9G8odxU=",
+    "lastModified": 1785363595
+  },
+  "disko": {
+    "type": "github",
+    "owner": "nix-community",
+    "repo": "disko",
+    "rev": "725ea35e410ad83be4931d1bff7e090eacaf3563",
+    "narHash": "sha256-uZkBR7yHdIKUFB5SZdfgh1qkGfI3XmYmI/lTiquxbck=",
+    "lastModified": 1789770686
+  },
+  "flake-compat": {
+    "type": "github",
+    "owner": "edolstra",
+    "repo": "flake-compat",
+    "rev": "5edf11c44bc78a0d334f6334cdaf7d60d732daab",
+    "narHash": "sha256-vNpUSpF5Nuw8xvDLj2KCwwksIbjua2LZCqhV1LNRDns=",
+    "lastModified": 1767039857
+  },
+  "hjem": {
+    "type": "github",
+    "owner": "feel-co",
+    "repo": "hjem",
+    "rev": "6b2cc57463bbbac3d7c61206ab365a2c928861a4",
+    "narHash": "sha256-Q5hGcKBaqz1L0neSRDfQgQPBKmSCkV1N5YBRwp+RtUc=",
+    "lastModified": 1791807571
+  },
+  "impermanence": {
+    "type": "github",
+    "owner": "nix-community",
+    "repo": "impermanence",
+    "rev": "7b1d382faf603b6d264f58627330f9faa5cba149",
+    "narHash": "sha256-03+JxvzmfwRu+5JafM0DLbxgHttOQZkUtDWBmeUkN8Y=",
+    "lastModified": 1769548169
+  },
+  "mango": {
+    "type": "github",
+    "owner": "mangowm",
+    "repo": "mango",
+    "rev": "f5b77adb6240de046b680bf04bb0901a9ed3a7fa",
+    "narHash": "sha256-o7azS0ibaWG4MGGZ+JZDsJe4JpCoPX78lTRuH+jioU4=",
+    "lastModified": 1790059918
+  },
+  "midnight-discord-css": {
+    "type": "fixed",
+    "url": "https://raw.githubusercontent.com/refact0r/midnight-discord/151176d321c8feb08f939fad0c69693947b73dda/build/midnight.css",
+    "sha256": "sha256-+VTFyp2y9FywZ0jpMIwJ3I+80QZ8SNn2uq976whyLf0=",
+    "unpack": "file"
+  },
+  "nix-gaming": {
+    "type": "github",
+    "owner": "fufexan",
+    "repo": "nix-gaming",
+    "rev": "b3d035dbc65250f6990ac526b0c9e188fe853856",
+    "narHash": "sha256-7ZMKTSse+BxmGiQ+isxga/biFfaEpEgYSRvv2efdCWY=",
+    "lastModified": 1791951554
+  },
+  "nix-index-database": {
+    "type": "github",
+    "owner": "Mic92",
+    "repo": "nix-index-database",
+    "rev": "9a2dd40780eeab8543aa97c59c26f11267025616",
+    "narHash": "sha256-LpIhxnuO0tYeZ4k7BbNMxsPs2zJpB4hWXO1jdhUuE7Q=",
+    "lastModified": 1791711434
+  },
+  "nixpkgs": {
+    "type": "github",
+    "owner": "nixos",
+    "repo": "nixpkgs",
+    "rev": "7fd4004d0511991fff3a0524856a9be09e28c5f0",
+    "narHash": "sha256-i5qk1kLiit98rRbh1AXmWBNT9QXC/y4l5Wk/u5EdpDQ=",
+    "lastModified": 1791734076
+  },
+  "system24-css": {
+    "type": "fixed",
+    "url": "https://raw.githubusercontent.com/refact0r/system24/e620464b32ccc0ddbd8e17e3ae351023ba900e6d/build/system24.css",
+    "sha256": "sha256-loIoJh88eRh2KT31cM6zdNKBTQu+6q8vXhwV3qpojGU=",
+    "unpack": "file"
+  },
+  "telegram-gruvbox": {
+    "type": "fixed",
+    "url": "https://raw.githubusercontent.com/indev29/telegram-gruvbox/e111a4b0acd8f77f396c78781df5bea7970d996a/colors.tdesktop-theme",
+    "sha256": "sha256-s/xkOx+WYrwFD8GffWfUvaUenU9gbS3ptlbw5ZTmuik=",
+    "unpack": "file"
+  },
+  "wrapper-modules": {
+    "type": "github",
+    "owner": "BirdeeHub",
+    "repo": "nix-wrapper-modules",
+    "rev": "74aaee6e989833345d2c67dc3090ffe8eb2a4dfa",
+    "narHash": "sha256-xnL4ZqUe2j/SYTAHQ8999+Ke5Xg7P+NKgdvXlRNLN24=",
+    "lastModified": 1791927952
+  }
+}
